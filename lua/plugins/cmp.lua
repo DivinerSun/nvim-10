@@ -223,6 +223,7 @@ return {
   {
     "neovim/nvim-lspconfig",
     opts = {
+      inlay_hints = { enabled = false },
       servers = { eslint = {}, dartls = {} },
       setup = {
         clangd = function(_, opts)
