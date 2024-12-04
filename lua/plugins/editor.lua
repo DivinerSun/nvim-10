@@ -107,11 +107,11 @@ return {
     end,
   },
   -- 配置变量重命名插件
-  {
-    "smjonas/inc-rename.nvim",
-    cmd = "IncRename",
-    config = true,
-  },
+  -- {
+  --   "smjonas/inc-rename.nvim",
+  --   cmd = "IncRename",
+  --   config = true,
+  -- },
   -- LSP 信息多行显示
   {
     "https://git.sr.ht/~whynothugo/lsp_lines.nvim",

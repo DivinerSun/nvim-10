@@ -58,7 +58,7 @@ return {
   -- 自定义Dashboard
   {
     "nvimdev/dashboard-nvim",
-    event = "VimEnter",
+    lazy = false,
     opts = function()
       local logo = [[
         $$$$$$$\  $$\            $$\                             $$\ $$\    $$\ $$\               
@@ -70,7 +70,8 @@ return {
         $$$$$$$  |$$ |   \$  /   $$ |$$ |  $$ |\$$$$$$$\ $$ |           \$  /   $$ |$$ | $$ | $$ |
         \_______/ \__|    \_/    \__|\__|  \__| \_______|\__|            \_/    \__|\__| \__| \__|
       ]]
-      logo = string.rep("\n", 2) .. logo .. "\n\n"
+      logo = string.rep("\n", 6) .. logo .. "\n\n"
+
       local opts = {
         theme = "doom",
         hide = {
@@ -80,31 +81,31 @@ return {
           header = vim.split(logo, "\n"),
           center = {
             {
-              action = "Telescope find_files",
-              desc = " Find file",
+              action = "lua LazyVim.pick()()",
+              desc = " Find File",
               icon = " ",
               key = "f",
             },
             {
               action = "ene | startinsert",
-              desc = " New file",
+              desc = " New File",
               icon = " ",
               key = "n",
             },
             {
-              action = "Telescope oldfiles",
-              desc = " Recent files",
+              action = 'lua LazyVim.pick("oldfiles")()',
+              desc = " Recent Files",
               icon = " ",
               key = "r",
             },
             {
-              action = "Telescope live_grep",
-              desc = " Find text",
+              action = 'lua LazyVim.pick("live_grep")()',
+              desc = " Find Text",
               icon = " ",
               key = "g",
             },
             {
-              action = [[lua require("lazyvim.util").telescope.config_files()()]],
+              action = "lua LazyVim.pick.config_files()()",
               desc = " Config",
               icon = " ",
               key = "c",
@@ -128,7 +129,9 @@ return {
               key = "l",
             },
             {
-              action = "qa",
+              action = function()
+                vim.api.nvim_input("<cmd>qa<cr>")
+              end,
               desc = " Quit",
               icon = " ",
               key = "q",
@@ -141,20 +144,25 @@ return {
           end,
         },
       }
+
       for _, button in ipairs(opts.config.center) do
         button.desc = button.desc .. string.rep(" ", 43 - #button.desc)
         button.key_format = "  %s"
       end
-      -- close Lazy and re-open when the dashboard is ready
+
+      -- open dashboard after closing lazy
       if vim.o.filetype == "lazy" then
-        vim.cmd.close()
-        vim.api.nvim_create_autocmd("User", {
-          pattern = "DashboardLoaded",
+        vim.api.nvim_create_autocmd("WinClosed", {
+          pattern = tostring(vim.api.nvim_get_current_win()),
+          once = true,
           callback = function()
-            require("lazy").show()
+            vim.schedule(function()
+              vim.api.nvim_exec_autocmds("UIEnter", { group = "dashboard" })
+            end)
           end,
         })
       end
+
       return opts
     end,
   },
