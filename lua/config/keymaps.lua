@@ -23,8 +23,9 @@ keymap("v", "<C-j>", "5j", opts)
 keymap("v", "<C-k>", "5k", opts)
 
 -- Buffer操作
-keymap("n", "<A-l>", ":bnext<CR>", opts)
-keymap("n", "<A-h>", ":bprevious<CR>", opts)
+-- bufferline.nvim 实现
+-- keymap("n", "<A-l>", ":bnext<CR>", opts)
+-- keymap("n", "<A-h>", ":bprevious<CR>", opts)
 keymap("n", "<S-q>", ":bdelete<CR>", opts)
 
 -- 窗口大小调整
