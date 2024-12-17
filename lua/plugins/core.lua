@@ -5,6 +5,22 @@ return {
       colorscheme = "tokyonight",
     },
   },
+  -- 自定义 Which-Key 布局格式
+  {
+    "folke/which-key.nvim",
+    event = "VeryLazy",
+    opts_extend = { "spec" },
+    opts = {
+      preset = "modern",
+      spec = {
+        {
+          mode = { "n", "v" },
+          { "<leader>t", group = "Translate", icon = { icon = "󰊿", color = "cyan" } },
+        },
+      },
+    },
+  },
+  -- 自定义Tokyonight主题配置
   {
     "folke/tokyonight.nvim",
     opts = {
