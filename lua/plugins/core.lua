@@ -191,6 +191,7 @@ return {
       },
     },
   },
+  -- 自定义顶部buffer状态栏
   {
     "akinsho/bufferline.nvim",
     event = "VeryLazy",
@@ -244,6 +245,191 @@ return {
           end)
         end,
       })
+    end,
+  },
+  -- 自定义底部状态栏
+  {
+    "nvim-lualine/lualine.nvim",
+    event = "VeryLazy",
+    opts = function()
+      vim.o.laststatus = vim.g.lualine_laststatus
+
+      local icons = LazyVim.config.icons
+      local hide_in_width = function()
+        return vim.fn.winwidth(0) > 80
+      end
+
+      local conditions = {
+        buffer_not_empty = function()
+          return vim.fn.empty(vim.fn.expand("%:t")) ~= 1
+        end,
+        hide_in_width = function()
+          return vim.fn.winwidth(0) > 80
+        end,
+        check_git_workspace = function()
+          local filepath = vim.fn.expand("%:p:h")
+          local gitdir = vim.fn.finddir(".git", filepath .. ";")
+          return gitdir and #gitdir > 0 and #gitdir < #filepath
+        end,
+      }
+
+      local diagnostics = {
+        "diagnostics",
+        symbols = {
+          error = icons.diagnostics.Error,
+          warn = icons.diagnostics.Warn,
+          info = icons.diagnostics.Info,
+          hint = icons.diagnostics.Hint,
+        },
+        colored = true,
+        update_in_insert = false,
+        always_visible = false,
+      }
+
+      local diff = {
+        "diff",
+        colored = true,
+        symbols = {
+          added = icons.git.added .. " ",
+          modified = icons.git.modified .. " ",
+          removed = icons.git.removed .. " ",
+        },
+        cond = hide_in_width,
+      }
+
+      local mode = {
+        "mode",
+        fmt = function(str)
+          return "--" .. str .. "--"
+        end,
+      }
+
+      local fileType = {
+        "filetype",
+        icons_enabled = true,
+        icon = nil,
+      }
+
+      local branch = {
+        "branch",
+        icons_enabled = true,
+        icon = icons.git.Branch,
+      }
+
+      local location = {
+        "location",
+        padding = 1,
+        color = { fg = "#FFFFFF", bg = "#d86079" },
+      }
+
+      -- cool function for progress
+      local progress = function()
+        local current_line = vim.fn.line(".")
+        local total_lines = vim.fn.line("$")
+        local chars = { "__", "▁▁", "▂▂", "▃▃", "▄▄", "▅▅", "▆▆", "▇▇", "██" }
+        local line_ratio = current_line / total_lines
+        local index = math.ceil(line_ratio * #chars)
+        return chars[index]
+      end
+
+      local spaces = function()
+        return icons.ui.Tab .. " " .. vim.api.nvim_get_option_value("shiftwidth", {})
+      end
+
+      local file_name = {
+        "filename",
+        cond = conditions.buffer_not_empty,
+      }
+
+      -- start for lsp
+      local lsp_info = {
+        function()
+          local conform = require("conform")
+          local lint = require("lint")
+
+          local msg = "[ LS Inactive ]"
+          local buf_clients = vim.lsp.get_clients({ bufnr = 0 })
+          local buf_client_names = {}
+          if next(buf_clients) == nil then
+            if type(msg) == "boolean" or #msg == 0 then
+              return "[ LS Inactive ]"
+            end
+            return msg
+          end
+          for _, client in pairs(buf_clients) do
+            if client.name ~= "conform" and client.name ~= "copilot" then
+              table.insert(buf_client_names, client.name)
+            end
+          end
+          local supported_formatters = conform.list_formatters_for_buffer(0)
+          vim.list_extend(buf_client_names, supported_formatters)
+          local supported_linters = lint.get_running(0)
+          vim.list_extend(buf_client_names, supported_linters)
+          -- local unique_client_names = vim.fn.uniq(buf_client_names)
+          msg = table.concat(buf_client_names, ", ")
+          return "[" .. msg .. "]"
+        end,
+        icon = icons.kinds.Constructor .. "",
+      }
+
+      return {
+        options = {
+          theme = "auto",
+          globalstatus = true,
+          component_separators = { left = "", right = "" },
+          section_separators = { left = "", right = "" },
+          disabled_filetypes = {
+            "TelescopePrompt",
+            "packer",
+            "alpha",
+            "dashboard",
+            "NvimTree",
+            "Outline",
+            "DressingInput",
+            "toggleterm",
+            "lazy",
+            "mason",
+            statusline = { "dashboard", "alpha", "starter" },
+          },
+          icons_enabled = true,
+          always_divide_middle = true,
+        },
+        sections = {
+          lualine_a = {
+            {
+              "fileformat",
+              symbols = {
+                mac = "", -- e711
+                unix = "", -- e711
+                dos = "", -- e70f
+                lunix = "", -- e712
+              },
+            },
+          },
+          lualine_b = { mode, branch },
+          lualine_c = { LazyVim.lualine.root_dir(), diagnostics, diff },
+          lualine_x = {
+            lsp_info,
+            spaces,
+            "encoding",
+            require("lazyvim.util").lualine.cmp_source("codeium"),
+            fileType,
+            "filesize",
+          },
+          lualine_y = { location },
+          lualine_z = { { progress, color = { fg = "#FF99CC" } } },
+        },
+        inactive_sections = {
+          lualine_a = {},
+          lualine_b = {},
+          lualine_c = { file_name },
+          lualine_x = { "location" },
+          lualine_y = {},
+          lualine_z = {},
+        },
+        tabline = {},
+        extensions = { "neo-tree", "lazy" },
+      }
     end,
   },
 }
