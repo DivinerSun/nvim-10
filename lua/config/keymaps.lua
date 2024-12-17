@@ -10,7 +10,7 @@ keymap("i", "kj", "<ESC>", opts)
 keymap("i", "jj", "<ESC>", opts)
 keymap("i", "kk", "<ESC>o", opts)
 keymap("v", "q", "<ESC>", opts)
-keymap("n", "<leader>w", ":w", opts)
+keymap("n", "<leader>w", ":w<CR>", opts)
 
 -- 快速跳转
 keymap("n", "<C-h>", "^", opts)

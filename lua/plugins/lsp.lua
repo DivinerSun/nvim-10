@@ -1,5 +1,4 @@
 return {
-
   -- LSP 信息多行显示
   {
     "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
