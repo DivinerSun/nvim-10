@@ -1,6 +1,19 @@
 return {
   {
     "saghen/blink.cmp",
+    dependencies = {
+      -- add source
+      { "hrsh7th/cmp-calc" },
+      { "hrsh7th/cmp-emoji" },
+      {
+        "roobert/tailwindcss-colorizer-cmp.nvim",
+        config = function()
+          require("tailwindcss-colorizer-cmp").setup({
+            color_square_width = 2,
+          })
+        end,
+      },
+    },
     opts = function(_, opts)
       local icons = LazyVim.config.icons
       opts.appearance = {
@@ -40,7 +53,7 @@ return {
         },
       }
       opts.sources = {
-        compat = { "calc", "emoji", "tailwind", "tailwindcss" },
+        compat = { "calc", "emoji", "tailwind", "tailwindcss", "tailwindcss-colorizer" },
         default = { "lazydev", "lsp", "path", "snippets", "buffer" },
         providers = {
           lazydev = {
