@@ -15,6 +15,12 @@ return {
       spec = {
         {
           mode = { "n", "v" },
+          {
+            "<leader>;",
+            "<cmd>lua vim.lsp.buf.code_action()<CR>",
+            desc = "Code Action",
+            icon = { icon = "", color = "cyan" },
+          },
           { "<leader>t", group = "Translate", icon = { icon = "󰊿", color = "cyan" } },
         },
       },
