@@ -255,9 +255,6 @@ return {
       vim.o.laststatus = vim.g.lualine_laststatus
 
       local icons = LazyVim.config.icons
-      local hide_in_width = function()
-        return vim.fn.winwidth(0) > 80
-      end
 
       local conditions = {
         buffer_not_empty = function()
@@ -288,13 +285,21 @@ return {
 
       local diff = {
         "diff",
-        colored = true,
         symbols = {
-          added = icons.git.added .. " ",
-          modified = icons.git.modified .. " ",
-          removed = icons.git.removed .. " ",
+          added = icons.git.added,
+          modified = icons.git.modified,
+          removed = icons.git.removed,
         },
-        cond = hide_in_width,
+        source = function()
+          local gitsigns = vim.b.gitsigns_status_dict
+          if gitsigns then
+            return {
+              added = gitsigns.added,
+              modified = gitsigns.changed,
+              removed = gitsigns.removed,
+            }
+          end
+        end,
       }
 
       local mode = {
@@ -455,6 +460,8 @@ return {
           local devicons = require("nvim-web-devicons")
           local navic = require("nvim-navic")
 
+          local lazyIcons = LazyVim.config.icons
+
           local filename = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(props.buf), ":t")
           if filename == "" then
             filename = "[No Name]"
@@ -463,7 +470,11 @@ return {
           local modified = vim.bo[props.buf].modified
 
           local function get_git_diff()
-            local icons = { removed = "", changed = "", added = "" }
+            local icons = {
+              removed = lazyIcons.git.removed,
+              changed = lazyIcons.git.modified,
+              added = lazyIcons.git.added,
+            }
             local signs = vim.b[props.buf].gitsigns_status_dict
             local labels = {}
             if signs == nil then
@@ -481,7 +492,12 @@ return {
           end
 
           local function get_diagnostic_label()
-            local icons = { error = "", warn = "", info = "", hint = "" }
+            local icons = {
+              error = lazyIcons.diagnostics.Error,
+              warn = lazyIcons.diagnostics.Warn,
+              info = lazyIcons.diagnostics.Info,
+              hint = lazyIcons.diagnostics.Hint,
+            }
             local label = {}
 
             for severity, icon in pairs(icons) do
