@@ -3,6 +3,8 @@ return {
     "saghen/blink.cmp",
     dependencies = {
       -- add source
+      "codeium.nvim",
+      "saghen/blink.compat",
       { "hrsh7th/cmp-calc" },
       { "hrsh7th/cmp-emoji" },
       {
@@ -50,16 +52,23 @@ return {
           Event = icons.kinds.Event,
           Operator = icons.kinds.Operator,
           TypeParameter = icons.kinds.TypeParameter,
+
+          Codeium = icons.kinds.Copilot,
         },
       }
       opts.sources = {
-        compat = { "calc", "emoji", "tailwind", "tailwindcss", "tailwindcss-colorizer" },
+        compat = { "calc", "emoji", "tailwind", "tailwindcss", "tailwindcss-colorizer", "codeium" },
         default = { "lazydev", "lsp", "path", "snippets", "buffer" },
         providers = {
           lazydev = {
             name = "LazyDev",
             module = "lazydev.integrations.blink",
             score_offset = 100,
+          },
+          codeium = {
+            kind = "Codeium",
+            score_offset = 100,
+            async = true,
           },
         },
       }
