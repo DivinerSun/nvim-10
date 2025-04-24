@@ -15,6 +15,7 @@ return {
           })
         end,
       },
+      "Kaiser-Yang/blink-cmp-avante",
     },
     opts = function(_, opts)
       local icons = LazyVim.config.icons
@@ -57,7 +58,18 @@ return {
         },
       }
       opts.sources = {
-        compat = { "calc", "emoji", "tailwind", "tailwindcss", "tailwindcss-colorizer", "codeium" },
+        compat = {
+          "calc",
+          "emoji",
+          "tailwind",
+          "tailwindcss",
+          "tailwindcss-colorizer",
+          "codeium",
+          "avante_commands",
+          "avante_mentions",
+          "avante_files",
+          "avante",
+        },
         default = { "lazydev", "lsp", "path", "snippets", "buffer" },
         providers = {
           lazydev = {
@@ -69,6 +81,31 @@ return {
             kind = "Codeium",
             score_offset = 100,
             async = true,
+          },
+          avante = {
+            module = "blink-cmp-avante",
+            name = "Avante",
+            opts = {
+              -- options for blink-cmp-avante
+            },
+          },
+          avante_commands = {
+            name = "avante_commands",
+            module = "blink.compat.source",
+            score_offset = 90, -- show at a higher priority than lsp
+            opts = {},
+          },
+          avante_files = {
+            name = "avante_files",
+            module = "blink.compat.source",
+            score_offset = 100, -- show at a higher priority than lsp
+            opts = {},
+          },
+          avante_mentions = {
+            name = "avante_mentions",
+            module = "blink.compat.source",
+            score_offset = 1000, -- show at a higher priority than lsp
+            opts = {},
           },
         },
       }
