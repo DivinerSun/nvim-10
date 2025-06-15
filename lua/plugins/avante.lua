@@ -8,7 +8,8 @@ return {
       return {
         provider = "qianwen",
         auto_suggestions_provider = "qianwen",
-        vendors = {
+        -- vendors = {
+        providers = {
           deepseek = {
             __inherited_from = "openai",
             api_key_name = "DEEPSEEK_NEOVIM_API_KEY",
