@@ -1,6 +1,6 @@
 -- 设置 leader 键
 vim.g.mapleader = " "
-vim.g.maplocalleader = " "
+vim.g.maplocalleader = "\\"
 
 local keymap = vim.keymap.set
 local opts = { noremap = true, silent = true }
@@ -65,14 +65,3 @@ keymap("n", "<leader>sx", ":close<CR>", { desc = "Close split" })
 -- 文件内替换
 keymap("n", "<leader>r", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], { desc = "Replace word cursor is on globally" })
 
--- 高亮复制
-vim.api.nvim_create_autocmd("TextYankPost", {
-  group = vim.api.nvim_create_augroup("kickstart-highlight-yank", { clear = true }),
-  callback = function()
-    vim.highlight.on_yank({
-      higroup = "IncSearch",
-      timeout = 200,
-    })
-  end,
-  desc = "Highlight yanked text"
-})

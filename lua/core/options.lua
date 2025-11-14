@@ -1,3 +1,6 @@
+-- 禁用 netrw banner
+vim.cmd("let g:netrw_banner = 0")
+
 -- 终端 GUI
 vim.opt.termguicolors = true    -- 启用真彩色
 vim.opt.background = "dark"   -- 设置背景
