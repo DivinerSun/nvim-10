@@ -53,7 +53,7 @@ return {
       no_bold = false, -- Force no bold
       no_underline = false, -- Force no underline
       styles = {
-        comments = { "italic", "bold" },
+        comments = { "bold" },
         properties = { "bold" },
         functions = { "bold" },
         keywords = { "italic", "bold" },
