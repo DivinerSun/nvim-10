@@ -2,6 +2,10 @@ return {
 	{
 		"nvzone/showkeys",
 		cmd = "ShowkeysToggle",
+		init = function()
+			-- 默认设置显示
+			vim.cmd("ShowkeysToggle")
+		end,
 		keys = {
 			{
 				"<leader>k",
@@ -28,7 +32,7 @@ return {
 			timeout = 3, -- in secs
 			maxkeys = 5,
 			show_count = false,
-			excluded_modes = { "i" },
+			-- excluded_modes = { "i" },
 
 			-- bottom-left, bottom-right, bottom-center, top-left, top-right, top-center
 			position = "bottom-right",
