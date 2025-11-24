@@ -1,275 +1,275 @@
 return {
-  {
-    "folke/tokyonight.nvim",
-    lazy = false,
-    priority = 1000,
-    opts = {
-      style = "strom", -- moon | storm | night | day
-      light_style = "day",
-      transparent = true,
-      terminal_colors = true,
-      styles = {
-        comments = { blod = true },
-        keywords = { italic = true, blod = true },
-        functions = { italic = true },
-        variables = {},
-        -- Background styles. Can be "dark", "transparent" or "normal"
-        sidebars = "transparent", -- style for sidebars, see below
-        floats = "transparent", -- style for floating windows
-      },
-      day_brightness = 0.3,
-      dim_inactive = false,
-      lualine_bold = false,
-      on_colors = function(C)
-        C.comment = "#FF81D0"
-        C.fg_gutter = "#813c85"
+	{
+		"folke/tokyonight.nvim",
+		lazy = false,
+		priority = 1000,
+		opts = {
+			style = "strom", -- moon | storm | night | day
+			light_style = "day",
+			transparent = true,
+			terminal_colors = true,
+			styles = {
+				comments = { blod = true },
+				keywords = { italic = true, blod = true },
+				functions = { italic = true },
+				variables = {},
+				-- Background styles. Can be "dark", "transparent" or "normal"
+				sidebars = "transparent", -- style for sidebars, see below
+				floats = "transparent", -- style for floating windows
+			},
+			day_brightness = 0.3,
+			dim_inactive = false,
+			lualine_bold = false,
+			on_colors = function(C)
+				C.comment = "#FF81D0"
+				C.fg_gutter = "#813c85"
 
-        return {
-          Comment = { fg = C.pink },
-          CmpItemMenu = { fg = C.pink, bg = C.None },
-          CmpItemKindSnippet = { fg = C.base, bg = C.mauve },
-          CmpItemKindKeyword = { fg = C.base, bg = C.red },
-          CmpItemKindText = { fg = C.base, bg = C.lavender },
-          CmpItemKindMethod = { fg = C.base, bg = C.blue },
-          CmpItemKindConstructor = { fg = C.base, bg = C.blue },
-          CmpItemKindFunction = { fg = C.base, bg = C.blue },
-          CmpItemKindFolder = { fg = C.base, bg = C.blue },
-          CmpItemKindModule = { fg = C.base, bg = C.blue },
-          CmpItemKindConstant = { fg = C.base, bg = C.peach },
-          CmpItemKindField = { fg = C.base, bg = C.green },
-          CmpItemKindProperty = { fg = C.base, bg = C.green },
-          CmpItemKindEnum = { fg = C.base, bg = C.green },
-          CmpItemKindUnit = { fg = C.base, bg = C.green },
-          CmpItemKindClass = { fg = C.base, bg = C.yellow },
-          CmpItemKindVariable = { fg = C.base, bg = C.flamingo },
-          CmpItemKindFile = { fg = C.base, bg = C.blue },
-          CmpItemKindInterface = { fg = C.base, bg = C.yellow },
-          CmpItemKindColor = { fg = C.base, bg = C.red },
-          CmpItemKindReference = { fg = C.base, bg = C.red },
-          CmpItemKindEnumMember = { fg = C.base, bg = C.red },
-          CmpItemKindStruct = { fg = C.base, bg = C.blue },
-          CmpItemKindValue = { fg = C.base, bg = C.peach },
-          CmpItemKindEvent = { fg = C.base, bg = C.blue },
-          CmpItemKindOperator = { fg = C.base, bg = C.blue },
-          CmpItemKindTypeParameter = { fg = C.base, bg = C.blue },
-          CmpItemKindCopilot = { fg = C.base, bg = C.teal },
-          CmpItemKindCodeium = { fg = C.base, bg = C.teal },
-        }
-      end,
-      on_highlights = function(highlights, colors) end,
-      cache = true,
-      plugins = {
-        all = package.loaded.lazy == nil,
-        auto = true,
-        telescope = true,
-      },
-    },
-  },
-  {
-    "catppuccin/nvim",
-    name = "catppuccin",
-    lazy = false, -- 确保插件立即加载
-    priority = 1000, -- 优先加载主题
-    opts = {
-      flavour = "auto", -- latte, frappe, macchiato, mocha
-      transparent_background = true, -- 启用透明背景
-      background = { -- :h background
-        light = "latte",
-        dark = "mocha",
-      },
-      float = {
-        transparent = true, -- enable transparent floating windows
-        solid = true, -- use solid styling for floating windows, see |winborder|
-      },
-      show_end_of_buffer = false, -- shows the '~' characters after the end of buffers
-      term_colors = true, -- sets terminal colors (e.g. `g:terminal_color_0`)
-      dim_inactive = {
-        enabled = false, -- dims the background color of inactive window
-        shade = "dark",
-        percentage = 0.15, -- percentage of the shade to apply to the inactive window
-      },
-      no_italic = false, -- Force no italic
-      no_bold = false, -- Force no bold
-      no_underline = false, -- Force no underline
-      styles = {
-        comments = { "bold" },
-        properties = { "bold" },
-        functions = { "bold" },
-        keywords = { "italic", "bold" },
-        operators = { "bold" },
-        conditionals = { "italic" },
-        loops = { "italic" },
-        booleans = { "bold", "italic" },
-        numbers = {},
-        types = {},
-        strings = {},
-        variables = {},
-      },
-      lsp_styles = { -- Handles the style of specific lsp hl groups (see `:h lsp-highlight`).
-        virtual_text = {
-          errors = { "italic" },
-          hints = { "italic" },
-          warnings = { "italic" },
-          information = { "italic" },
-          ok = { "italic" },
-        },
-        underlines = {
-          errors = { "underline" },
-          hints = { "underline" },
-          warnings = { "underline" },
-          information = { "underline" },
-          ok = { "underline" },
-        },
-        inlay_hints = {
-          background = true,
-        },
-      },
-      color_overrides = {
-        all = {
-          -- text = "#acb8f4",
-        },
-      },
-      custom_highlights = function(colors)
-        return {
-          Comment = { fg = "#FF81D0" },
-          Gutter = { fg = "#813c85" },
-          TabLineSel = { bg = colors.pink },
-          CmpBorder = { fg = colors.surface2 },
-          Pmenu = { bg = colors.none },
-        }
-      end,
-      highlight_overrides = {
-        all = function(cp)
-          local clear = {}
-          local transparent_background = true
-          return {
-            -- For base configs
-            NormalFloat = { fg = cp.text, bg = transparent_background and cp.none or cp.mantle },
-            FloatBorder = {
-              fg = transparent_background and cp.blue or cp.mantle,
-              bg = transparent_background and cp.none or cp.mantle,
-            },
-            CursorLineNr = { fg = cp.green },
+				return {
+					Comment = { fg = C.pink },
+					CmpItemMenu = { fg = C.pink, bg = C.None },
+					CmpItemKindSnippet = { fg = C.base, bg = C.mauve },
+					CmpItemKindKeyword = { fg = C.base, bg = C.red },
+					CmpItemKindText = { fg = C.base, bg = C.lavender },
+					CmpItemKindMethod = { fg = C.base, bg = C.blue },
+					CmpItemKindConstructor = { fg = C.base, bg = C.blue },
+					CmpItemKindFunction = { fg = C.base, bg = C.blue },
+					CmpItemKindFolder = { fg = C.base, bg = C.blue },
+					CmpItemKindModule = { fg = C.base, bg = C.blue },
+					CmpItemKindConstant = { fg = C.base, bg = C.peach },
+					CmpItemKindField = { fg = C.base, bg = C.green },
+					CmpItemKindProperty = { fg = C.base, bg = C.green },
+					CmpItemKindEnum = { fg = C.base, bg = C.green },
+					CmpItemKindUnit = { fg = C.base, bg = C.green },
+					CmpItemKindClass = { fg = C.base, bg = C.yellow },
+					CmpItemKindVariable = { fg = C.base, bg = C.flamingo },
+					CmpItemKindFile = { fg = C.base, bg = C.blue },
+					CmpItemKindInterface = { fg = C.base, bg = C.yellow },
+					CmpItemKindColor = { fg = C.base, bg = C.red },
+					CmpItemKindReference = { fg = C.base, bg = C.red },
+					CmpItemKindEnumMember = { fg = C.base, bg = C.red },
+					CmpItemKindStruct = { fg = C.base, bg = C.blue },
+					CmpItemKindValue = { fg = C.base, bg = C.peach },
+					CmpItemKindEvent = { fg = C.base, bg = C.blue },
+					CmpItemKindOperator = { fg = C.base, bg = C.blue },
+					CmpItemKindTypeParameter = { fg = C.base, bg = C.blue },
+					CmpItemKindCopilot = { fg = C.base, bg = C.teal },
+					CmpItemKindCodeium = { fg = C.base, bg = C.teal },
+				}
+			end,
+			on_highlights = function(highlights, colors) end,
+			cache = true,
+			plugins = {
+				all = package.loaded.lazy == nil,
+				auto = true,
+				telescope = true,
+			},
+		},
+	},
+	{
+		"catppuccin/nvim",
+		name = "catppuccin",
+		lazy = false, -- 确保插件立即加载
+		priority = 1000, -- 优先加载主题
+		opts = {
+			flavour = "auto", -- latte, frappe, macchiato, mocha
+			transparent_background = true, -- 启用透明背景
+			background = { -- :h background
+				light = "latte",
+				dark = "mocha",
+			},
+			float = {
+				transparent = true, -- enable transparent floating windows
+				solid = true, -- use solid styling for floating windows, see |winborder|
+			},
+			show_end_of_buffer = false, -- shows the '~' characters after the end of buffers
+			term_colors = true, -- sets terminal colors (e.g. `g:terminal_color_0`)
+			dim_inactive = {
+				enabled = false, -- dims the background color of inactive window
+				shade = "dark",
+				percentage = 0.15, -- percentage of the shade to apply to the inactive window
+			},
+			no_italic = false, -- Force no italic
+			no_bold = false, -- Force no bold
+			no_underline = false, -- Force no underline
+			styles = {
+				comments = { "bold" },
+				properties = { "bold" },
+				functions = { "bold" },
+				keywords = { "italic", "bold" },
+				operators = { "bold" },
+				conditionals = { "italic" },
+				loops = { "italic" },
+				booleans = { "bold", "italic" },
+				numbers = {},
+				types = {},
+				strings = {},
+				variables = {},
+			},
+			lsp_styles = { -- Handles the style of specific lsp hl groups (see `:h lsp-highlight`).
+				virtual_text = {
+					errors = { "italic" },
+					hints = { "italic" },
+					warnings = { "italic" },
+					information = { "italic" },
+					ok = { "italic" },
+				},
+				underlines = {
+					errors = { "underline" },
+					hints = { "underline" },
+					warnings = { "underline" },
+					information = { "underline" },
+					ok = { "underline" },
+				},
+				inlay_hints = {
+					background = true,
+				},
+			},
+			color_overrides = {
+				all = {
+					-- text = "#acb8f4",
+				},
+			},
+			custom_highlights = function(colors)
+				return {
+					Comment = { fg = "#FF81D0" },
+					Gutter = { fg = "#813c85" },
+					TabLineSel = { bg = colors.pink },
+					CmpBorder = { fg = colors.surface2 },
+					Pmenu = { bg = colors.none },
+				}
+			end,
+			highlight_overrides = {
+				all = function(cp)
+					local clear = {}
+					local transparent_background = true
+					return {
+						-- For base configs
+						NormalFloat = { fg = cp.text, bg = transparent_background and cp.none or cp.mantle },
+						FloatBorder = {
+							fg = transparent_background and cp.blue or cp.mantle,
+							bg = transparent_background and cp.none or cp.mantle,
+						},
+						CursorLineNr = { fg = cp.green },
 
-            -- For native lsp configs
-            DiagnosticVirtualTextError = { bg = cp.none },
-            DiagnosticVirtualTextWarn = { bg = cp.none },
-            DiagnosticVirtualTextInfo = { bg = cp.none },
-            DiagnosticVirtualTextHint = { bg = cp.none },
-            LspInfoBorder = { link = "FloatBorder" },
+						-- For native lsp configs
+						DiagnosticVirtualTextError = { bg = cp.none },
+						DiagnosticVirtualTextWarn = { bg = cp.none },
+						DiagnosticVirtualTextInfo = { bg = cp.none },
+						DiagnosticVirtualTextHint = { bg = cp.none },
+						LspInfoBorder = { link = "FloatBorder" },
 
-            -- For mason.nvim
-            MasonNormal = { link = "NormalFloat" },
+						-- For mason.nvim
+						MasonNormal = { link = "NormalFloat" },
 
-            -- For indent-blankline
-            IblIndent = { fg = cp.surface0 },
-            IblScope = { fg = cp.surface2, style = { "bold" } },
+						-- For indent-blankline
+						IblIndent = { fg = cp.surface0 },
+						IblScope = { fg = cp.surface2, style = { "bold" } },
 
-            -- For nvim-cmp and wilder.nvim
-            Pmenu = { fg = cp.overlay2, bg = transparent_background and cp.none or cp.base },
-            PmenuBorder = { fg = cp.surface1, bg = transparent_background and cp.none or cp.base },
-            PmenuSel = { bg = cp.green, fg = cp.base },
-            CmpItemAbbr = { fg = cp.overlay2 },
-            CmpItemAbbrMatch = { fg = cp.blue, style = { "bold" } },
-            CmpDoc = { link = "NormalFloat" },
-            CmpDocBorder = {
-              fg = transparent_background and cp.surface1 or cp.mantle,
-              bg = transparent_background and cp.none or cp.mantle,
-            },
+						-- For nvim-cmp and wilder.nvim
+						Pmenu = { fg = cp.overlay2, bg = transparent_background and cp.none or cp.base },
+						PmenuBorder = { fg = cp.surface1, bg = transparent_background and cp.none or cp.base },
+						PmenuSel = { bg = cp.green, fg = cp.base },
+						CmpItemAbbr = { fg = cp.overlay2 },
+						CmpItemAbbrMatch = { fg = cp.blue, style = { "bold" } },
+						CmpDoc = { link = "NormalFloat" },
+						CmpDocBorder = {
+							fg = transparent_background and cp.surface1 or cp.mantle,
+							bg = transparent_background and cp.none or cp.mantle,
+						},
 
-            -- For fidget
-            FidgetTask = { bg = cp.none, fg = cp.surface2 },
-            FidgetTitle = { fg = cp.blue, style = { "bold" } },
+						-- For fidget
+						FidgetTask = { bg = cp.none, fg = cp.surface2 },
+						FidgetTitle = { fg = cp.blue, style = { "bold" } },
 
-            -- For nvim-notify
-            NotifyBackground = { bg = cp.base },
+						-- For nvim-notify
+						NotifyBackground = { bg = cp.base },
 
-            -- For nvim-tree
-            NvimTreeRootFolder = { fg = cp.pink },
-            NvimTreeIndentMarker = { fg = cp.surface2 },
+						-- For nvim-tree
+						NvimTreeRootFolder = { fg = cp.pink },
+						NvimTreeIndentMarker = { fg = cp.surface2 },
 
-            -- For trouble.nvim
-            TroubleNormal = { bg = transparent_background and cp.none or cp.base },
-            TroubleNormalNC = { bg = transparent_background and cp.none or cp.base },
+						-- For trouble.nvim
+						TroubleNormal = { bg = transparent_background and cp.none or cp.base },
+						TroubleNormalNC = { bg = transparent_background and cp.none or cp.base },
 
-            -- For telescope.nvim
-            TelescopeMatching = { fg = cp.lavender },
-            TelescopeResultsDiffAdd = { fg = cp.green },
-            TelescopeResultsDiffChange = { fg = cp.yellow },
-            TelescopeResultsDiffDelete = { fg = cp.red },
+						-- For telescope.nvim
+						TelescopeMatching = { fg = cp.lavender },
+						TelescopeResultsDiffAdd = { fg = cp.green },
+						TelescopeResultsDiffChange = { fg = cp.yellow },
+						TelescopeResultsDiffDelete = { fg = cp.red },
 
-            -- For glance.nvim
-            GlanceWinBarFilename = { fg = cp.subtext1, style = { "bold" } },
-            GlanceWinBarFilepath = { fg = cp.subtext0, style = { "italic" } },
-            GlanceWinBarTitle = { fg = cp.teal, style = { "bold" } },
-            GlanceListCount = { fg = cp.lavender },
-            GlanceListFilepath = { link = "Comment" },
-            GlanceListFilename = { fg = cp.blue },
-            GlanceListMatch = { fg = cp.lavender, style = { "bold" } },
-            GlanceFoldIcon = { fg = cp.green },
+						-- For glance.nvim
+						GlanceWinBarFilename = { fg = cp.subtext1, style = { "bold" } },
+						GlanceWinBarFilepath = { fg = cp.subtext0, style = { "italic" } },
+						GlanceWinBarTitle = { fg = cp.teal, style = { "bold" } },
+						GlanceListCount = { fg = cp.lavender },
+						GlanceListFilepath = { link = "Comment" },
+						GlanceListFilename = { fg = cp.blue },
+						GlanceListMatch = { fg = cp.lavender, style = { "bold" } },
+						GlanceFoldIcon = { fg = cp.green },
 
-            -- For nvim-treehopper
-            TSNodeKey = {
-              fg = cp.peach,
-              bg = transparent_background and cp.none or cp.base,
-              style = { "bold", "underline" },
-            },
+						-- For nvim-treehopper
+						TSNodeKey = {
+							fg = cp.peach,
+							bg = transparent_background and cp.none or cp.base,
+							style = { "bold", "underline" },
+						},
 
-            -- For treesitter
-            ["@keyword.return"] = { fg = cp.pink, style = clear },
-            ["@error.c"] = { fg = cp.none, style = clear },
-            ["@error.cpp"] = { fg = cp.none, style = clear },
-          }
-        end,
-      },
-      default_integrations = true,
-      auto_integrations = false,
-      integrations = {
-        cmp = true,
-        dap = true,
-        dap_ui = true,
-        diffview = true,
-        dropbar = { enabled = true, color_mode = true },
-        fidget = true,
-        flash = true,
-        fzf = true,
-        gitsigns = true,
-        grug_far = true,
-        hop = true,
-        indent_blankline = { enabled = true, colored_indent_levels = true },
-        lsp_saga = true,
-        lsp_trouble = true,
-        markdown = true,
-        mason = true,
-        mini = { enabled = true },
-        native_lsp = {
-          enabled = true,
-          virtual_text = {
-            errors = { "italic" },
-            hints = { "italic" },
-            warnings = { "italic" },
-            information = { "italic" },
-          },
-          underlines = {
-            errors = { "underline" },
-            hints = { "underline" },
-            warnings = { "underline" },
-            information = { "underline" },
-          },
-        },
-        notify = true,
-        nvimtree = true,
-        rainbow_delimiters = true,
-        render_markdown = true,
-        semantic_tokens = true,
-        telescope = { enabled = true, style = "nvchad" },
-        treesitter = true,
-        treesitter_context = true,
-        which_key = true,
-      },
-    },
-    config = function(_, opts)
-      require("catppuccin").setup(opts)
-    end,
-  },
+						-- For treesitter
+						["@keyword.return"] = { fg = cp.pink, style = clear },
+						["@error.c"] = { fg = cp.none, style = clear },
+						["@error.cpp"] = { fg = cp.none, style = clear },
+					}
+				end,
+			},
+			default_integrations = true,
+			auto_integrations = false,
+			integrations = {
+				cmp = true,
+				dap = true,
+				dap_ui = true,
+				diffview = true,
+				dropbar = { enabled = true, color_mode = true },
+				fidget = true,
+				flash = true,
+				fzf = true,
+				gitsigns = true,
+				grug_far = true,
+				hop = true,
+				indent_blankline = { enabled = true, colored_indent_levels = true },
+				lsp_saga = true,
+				lsp_trouble = true,
+				markdown = true,
+				mason = true,
+				mini = { enabled = true },
+				native_lsp = {
+					enabled = true,
+					virtual_text = {
+						errors = { "italic" },
+						hints = { "italic" },
+						warnings = { "italic" },
+						information = { "italic" },
+					},
+					underlines = {
+						errors = { "underline" },
+						hints = { "underline" },
+						warnings = { "underline" },
+						information = { "underline" },
+					},
+				},
+				notify = true,
+				nvimtree = true,
+				rainbow_delimiters = true,
+				render_markdown = true,
+				semantic_tokens = true,
+				telescope = { enabled = true, style = "nvchad" },
+				treesitter = true,
+				treesitter_context = true,
+				which_key = true,
+			},
+		},
+		config = function(_, opts)
+			require("catppuccin").setup(opts)
+		end,
+	},
 }

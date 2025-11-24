@@ -11,10 +11,10 @@ keymap("i", "jj", "<ESC>", opts)
 keymap("i", "kk", "<ESC>o", opts)
 
 -- 快速跳转
-keymap({"n", "v"}, "<C-h>", "^", opts)
-keymap({"n", "v"}, "<C-l>", "$", opts)
-keymap({"n", "v"}, "<C-j>", "5j", opts)
-keymap({"n", "v"}, "<C-k>", "5k", opts)
+keymap({ "n", "v" }, "<C-h>", "^", opts)
+keymap({ "n", "v" }, "<C-l>", "$", opts)
+keymap({ "n", "v" }, "<C-j>", "5j", opts)
+keymap({ "n", "v" }, "<C-k>", "5k", opts)
 -- 更好的 j/k 移动（处理折行）
 keymap("n", "j", "v:count == 0 ? 'gj' : 'j'", { expr = true })
 keymap("n", "k", "v:count == 0 ? 'gk' : 'k'", { expr = true })
@@ -63,5 +63,9 @@ keymap("n", "<leader>sh", ":split<CR>", { desc = "Split horizontally" })
 keymap("n", "<leader>sx", ":close<CR>", { desc = "Close split" })
 
 -- 文件内替换
-keymap("n", "<leader>r", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], { desc = "Replace word cursor is on globally" })
-
+keymap(
+	"n",
+	"<leader>r",
+	[[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]],
+	{ desc = "Replace word cursor is on globally" }
+)
