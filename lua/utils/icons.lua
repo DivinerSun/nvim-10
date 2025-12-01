@@ -1,7 +1,29 @@
 local M = {}
 
+M.ui = {
+	Separator = "-",
+	Tab = "󰌒",
+	TabClose = "󰅝",
+	TabActive = "",
+	TabInactive = "󰅙",
+}
+
+M.diagnostics = {
+	Error = "",
+	Warn = "",
+	Info = "",
+	Hint = "",
+}
+
+M.git = {
+	Added = "",
+	Modified = "󰬔",
+	Removed = "",
+	Branch = "󱓎",
+}
+
 -- 基础图标
-M.kind_icons = {
+M.kinds = {
 	Text = "󰉿",
 	Method = "󰊕",
 	Function = "󰡱",
