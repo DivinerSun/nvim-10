@@ -56,3 +56,14 @@ vim.opt.backup = false -- 不创建备份文件
 vim.opt.writebackup = false -- 保存时不创建备份
 vim.opt.swapfile = false -- 不创建交换文件
 vim.opt.undofile = true -- 持久化 undo 历史
+
+-- 适配 Neovide
+if vim.g.neovide then
+	local alpha = function()
+		return string.format("%x", math.floor(255 * (vim.g.transparency or 0.8)))
+	end
+	vim.g.neovide_opacity = 0.1
+	vim.g.transparency = 0.6
+	vim.g.neovide_background_color = "#0f1117" .. alpha()
+	vim.g.neovide_cursor_vfx_mode = "railgun"
+end
