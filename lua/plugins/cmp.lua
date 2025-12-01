@@ -139,11 +139,11 @@ return {
 											Path = "[󰴠]",
 											Snippets = "[󰬚]",
 											Lazydev = "[󰵮]",
-											Ripgrep = "[R]",
-											Emoji = "[E]",
-											NerdFonts = "[NF]",
-											CssVars = "[CV]",
-											Avante = "[A]",
+											Ripgrep = "[󰬙]",
+											Emoji = "[󰞅]",
+											NerdFonts = "[]",
+											CssVars = "[]",
+											Avante = "[󰬈]",
 										}
 										return source_map[ctx.source_name] or "[" .. ctx.source_name .. "]"
 									end,
@@ -157,6 +157,17 @@ return {
 					},
 					list = {
 						selection = { preselect = true, auto_insert = true },
+						-- ⭐ 排序配置
+						sorting = {
+							-- 排序组件（按优先级）
+							components = {
+								"score", -- 按匹配分数
+								"kind", -- 按类型排序
+								"label", -- 按字母顺序
+								"source", -- 按来源
+								"sort_text", -- 使用 LSP sortText
+							},
+						},
 					},
 				},
 				signature = { enabled = true },

@@ -220,7 +220,7 @@ return {
 					BlinkCmpSourceLsp = { fg = C.blue, italic = true }, -- LSP - 蓝色
 					BlinkCmpSourceBuffer = { fg = C.green, italic = true }, -- Buffer - 绿色
 					BlinkCmpSourcePath = { fg = C.yellow, italic = true }, -- Path - 黄色
-					BlinkCmpSourceSnippets = { fg = C.magenta, italic = true }, -- Snippets - 洋红
+					BlinkCmpSourceSnippet = { fg = C.magenta, italic = true }, -- Snippets - 洋红
 					BlinkCmpSourceLazydev = { fg = C.teal, italic = true }, -- LazyDev - 青色
 					BlinkCmpSourceRipgrep = { fg = C.teal, italic = true }, -- Ripgrep - 青色
 					BlinkCmpSourceEmoji = { fg = C.orange, italic = true }, -- Emoji - 青色
