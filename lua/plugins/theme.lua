@@ -13,9 +13,8 @@ return {
 				keywords = { italic = true, blod = true },
 				functions = { italic = true },
 				variables = {},
-				-- Background styles. Can be "dark", "transparent" or "normal"
-				sidebars = "transparent", -- style for sidebars, see below
-				floats = "transparent", -- style for floating windows
+				sidebars = "transparent",
+				floats = "transparent",
 			},
 			day_brightness = 0.3,
 			dim_inactive = false,
@@ -26,6 +25,40 @@ return {
 
 				return {
 					Comment = { fg = C.pink },
+
+					BlinkCmpKindText = { fg = C.blue1 }, -- 蓝色
+					BlinkCmpKindMethod = { fg = C.magenta2 }, -- 紫色
+					BlinkCmpKindFunction = { fg = C.blue }, -- 蓝色
+					BlinkCmpKindConstructor = { fg = C.orange }, -- 橙色
+					BlinkCmpKindField = { fg = C.green }, -- 绿色
+					BlinkCmpKindVariable = { fg = C.purple }, -- 紫色
+					BlinkCmpKindClass = { fg = C.yellow }, -- 黄色
+					BlinkCmpKindInterface = { fg = C.cyan }, -- 青色
+					BlinkCmpKindModule = { fg = C.blue }, -- 蓝色
+					BlinkCmpKindProperty = { fg = C.green1 }, -- 浅绿
+					BlinkCmpKindUnit = { fg = C.green2 }, -- 深绿
+					BlinkCmpKindValue = { fg = C.orange }, -- 橙色
+					BlinkCmpKindEnum = { fg = C.green }, -- 绿色
+					BlinkCmpKindKeyword = { fg = C.red }, -- 红色
+					BlinkCmpKindSnippet = { fg = C.magenta }, -- 洋红
+					BlinkCmpKindColor = { fg = C.red }, -- 红色
+					BlinkCmpKindFile = { fg = C.blue }, -- 蓝色
+					BlinkCmpKindReference = { fg = C.red1 }, -- 浅红
+					BlinkCmpKindFolder = { fg = C.blue }, -- 蓝色
+					BlinkCmpKindEnumMember = { fg = C.green }, -- 绿色
+					BlinkCmpKindConstant = { fg = C.orange }, -- 橙色
+					BlinkCmpKindStruct = { fg = C.cyan }, -- 青色
+					BlinkCmpKindEvent = { fg = C.magenta }, -- 洋红
+					BlinkCmpKindOperator = { fg = C.cyan }, -- 青色
+					BlinkCmpKindTypeParameter = { fg = C.teal }, -- 青绿
+
+					-- ⭐ Blink.cmp 来源颜色配置
+					BlinkCmpSourceLsp = { fg = C.cyan }, -- LSP - 蓝色
+					BlinkCmpSourceBuffer = { fg = C.green }, -- Buffer - 绿色
+					BlinkCmpSourcePath = { fg = C.yellow }, -- Path - 黄色
+					BlinkCmpSourceSnippets = { fg = C.teal }, -- Snippets - 洋红
+					BlinkCmpSourceLazydev = { fg = C.blue }, -- LazyDev - 青色
+
 					CmpItemMenu = { fg = C.pink, bg = C.None },
 					CmpItemKindSnippet = { fg = C.base, bg = C.mauve },
 					CmpItemKindKeyword = { fg = C.base, bg = C.red },
@@ -56,7 +89,14 @@ return {
 					CmpItemKindCodeium = { fg = C.base, bg = C.teal },
 				}
 			end,
-			on_highlights = function(highlights, colors) end,
+			on_highlights = function(highlights, C)
+				-- ⭐ 选中项高亮（明显的背景色）
+				highlights.BlinkCmpMenuSelection = {
+					bg = C.comment, -- 蓝色背景
+					fg = C.bg, -- 深色前景（文字）
+					bold = true, -- 加粗
+				}
+			end,
 			cache = true,
 			plugins = {
 				all = package.loaded.lazy == nil,
@@ -129,13 +169,61 @@ return {
 					-- text = "#acb8f4",
 				},
 			},
-			custom_highlights = function(colors)
+			custom_highlights = function(C)
 				return {
 					Comment = { fg = "#FF81D0" },
 					Gutter = { fg = "#813c85" },
-					TabLineSel = { bg = colors.pink },
-					CmpBorder = { fg = colors.surface2 },
-					Pmenu = { bg = colors.none },
+					TabLineSel = { bg = C.pink },
+					CmpBorder = { fg = C.surface2 },
+					Pmenu = { bg = C.none },
+
+					-- ⭐ Blink.cmp 高亮组配置
+					-- 基础高亮
+					BlinkCmpLabel = { fg = C.fg },
+					BlinkCmpLabelDeprecated = { fg = C.comment, strikethrough = true },
+					BlinkCmpLabelDescription = { fg = C.comment },
+					-- ⭐ 选中项高亮（明显的背景色）
+					BlinkCmpMenuSelection = {
+						bg = C.comment, -- 蓝色背景
+						fg = C.bg, -- 深色前景（文字）
+						bold = true, -- 加粗
+					},
+
+					-- 不同类型的颜色配置（格式：BlinkCmpKind + 类型名
+					BlinkCmpKindText = { fg = C.blue1 }, -- 蓝色
+					BlinkCmpKindMethod = { fg = C.magenta2 }, -- 紫色
+					BlinkCmpKindFunction = { fg = C.blue }, -- 蓝色
+					BlinkCmpKindConstructor = { fg = C.orange }, -- 橙色
+					BlinkCmpKindField = { fg = C.green }, -- 绿色
+					BlinkCmpKindVariable = { fg = C.purple }, -- 紫色
+					BlinkCmpKindClass = { fg = C.yellow }, -- 黄色
+					BlinkCmpKindInterface = { fg = C.cyan }, -- 青色
+					BlinkCmpKindModule = { fg = C.blue }, -- 蓝色
+					BlinkCmpKindProperty = { fg = C.green1 }, -- 浅绿
+					BlinkCmpKindUnit = { fg = C.green2 }, -- 深绿
+					BlinkCmpKindValue = { fg = C.orange }, -- 橙色
+					BlinkCmpKindEnum = { fg = C.green }, -- 绿色
+					BlinkCmpKindKeyword = { fg = C.red }, -- 红色
+					BlinkCmpKindSnippet = { fg = C.magenta }, -- 洋红
+					BlinkCmpKindColor = { fg = C.red }, -- 红色
+					BlinkCmpKindFile = { fg = C.blue }, -- 蓝色
+					BlinkCmpKindReference = { fg = C.red1 }, -- 浅红
+					BlinkCmpKindFolder = { fg = C.blue }, -- 蓝色
+					BlinkCmpKindEnumMember = { fg = C.green }, -- 绿色
+					BlinkCmpKindConstant = { fg = C.orange }, -- 橙色
+					BlinkCmpKindStruct = { fg = C.cyan }, -- 青色
+					BlinkCmpKindEvent = { fg = C.magenta }, -- 洋红
+					BlinkCmpKindOperator = { fg = C.cyan }, -- 青色
+					BlinkCmpKindTypeParameter = { fg = C.teal }, -- 青绿）
+
+					-- ⭐ Blink.cmp 来源颜色配置
+					BlinkCmpSourceLsp = { fg = C.blue, italic = true }, -- LSP - 蓝色
+					BlinkCmpSourceBuffer = { fg = C.green, italic = true }, -- Buffer - 绿色
+					BlinkCmpSourcePath = { fg = C.yellow, italic = true }, -- Path - 黄色
+					BlinkCmpSourceSnippets = { fg = C.magenta, italic = true }, -- Snippets - 洋红
+					BlinkCmpSourceLazydev = { fg = C.teal, italic = true }, -- LazyDev - 青色
+					BlinkCmpSourceRipgrep = { fg = C.teal, italic = true }, -- Ripgrep - 青色
+					BlinkCmpSourceEmoji = { fg = C.orange, italic = true }, -- Emoji - 青色
 				}
 			end,
 			highlight_overrides = {

@@ -8,3 +8,7 @@ foo.*
 data
 
 lazy-lock.json
+
+.idea/
+.qoder/
+.vscode/

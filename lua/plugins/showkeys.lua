@@ -1,6 +1,6 @@
 return {
 	{
-		"nvzone/showkeys",
+		"DivinerSun/showkeys",
 		cmd = "ShowkeysToggle",
 		init = function()
 			-- 默认设置显示
