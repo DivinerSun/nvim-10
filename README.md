@@ -14,4 +14,6 @@ brew install neovim
 brew install tree-sitter
 
 brew install fzf
+
+brew install TheZoraiz/ascii-image-converter/ascii-image-converter
 ```

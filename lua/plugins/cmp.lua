@@ -6,6 +6,37 @@ return {
 		opts = {},
 	},
 	{
+		"saghen/blink.pairs",
+		version = "*",
+		dependencies = "saghen/blink.download",
+		opts = {
+			mappings = {
+				enabled = true,
+				cmdline = true,
+				disabled_filetypes = {},
+				pairs = {},
+			},
+			highlights = {
+				enabled = true,
+				cmdline = true,
+				groups = {
+					"BlinkPairsOrange",
+					"BlinkPairsPurple",
+					"BlinkPairsBlue",
+				},
+				unmatched_group = "BlinkPairsUnmatched",
+				matchparen = {
+					enabled = true,
+					cmdline = false,
+					include_surrounding = false,
+					group = "BlinkPairsMatchParen",
+					priority = 250,
+				},
+			},
+			debug = false,
+		},
+	},
+	{
 		"kristijanhusak/vim-dadbod-ui",
 		dependencies = {
 			{ "tpope/vim-dadbod", lazy = true },

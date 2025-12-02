@@ -34,8 +34,8 @@ keymap("n", "<Esc>", ":nohl<CR>", { desc = "Clear highlights", silent = true })
 -- 移动选中文本
 keymap("v", "<A-j>", ":m '>+1<CR>gv=gv", { desc = "Move line down" })
 keymap("v", "<A-k>", ":m '<-2<CR>gv=gv", { desc = "Move line up" })
-keymap("n", "<A-j>", ":m '>+1<CR>", opts)
-keymap("n", "<A-k>", ":m '<-2<CR>", opts)
+keymap("n", "<A-j>", ":m .+1<CR>==", { desc = "Move line down" })
+keymap("n", "<A-k>", ":m .-2<CR>==", { desc = "Move line up" })
 
 -- 将下一行内容快速移动到行尾
 keymap("n", "J", "mzJ`z", opts)
@@ -48,7 +48,7 @@ keymap("n", "<C-u>", "<C-u>zz")
 keymap("n", "n", "nzzzv")
 keymap("n", "N", "Nzzzv")
 
--- 保持 Visual 选择状态
+-- 快速缩进
 keymap("v", "<", "<gv", opts)
 keymap("v", ">", ">gv", opts)
 
@@ -59,7 +59,7 @@ keymap("n", "Q", ":bdelete<CR>", { desc = "Delete buffer" })
 
 -- 分割窗口
 keymap("n", "<leader>sv", ":vsplit<CR>", { desc = "Split vertically" })
-keymap("n", "<leader>sh", ":split<CR>", { desc = "Split horizontally" })
+keymap("n", "<leader>so", ":split<CR>", { desc = "Split horizontally" })
 keymap("n", "<leader>sx", ":close<CR>", { desc = "Close split" })
 
 -- 文件内替换

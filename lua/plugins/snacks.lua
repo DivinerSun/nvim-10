@@ -591,6 +591,8 @@ return {
 			},
 		},
 		init = function()
+			local Snacks = require("snacks")
+
 			vim.api.nvim_create_autocmd("User", {
 				pattern = "VeryLazy",
 				callback = function()
@@ -630,5 +632,64 @@ return {
 				end,
 			})
 		end,
+	},
+	{
+		"folke/todo-comments.nvim",
+		event = { "BufReadPre", "BufNewFile" },
+		dependencies = { "nvim-lua/plenary.nvim" },
+		config = function()
+			local todo_comments = require("todo-comments")
+
+			todo_comments.setup({
+				keywords = {
+					FIX = {
+						icon = " ",
+						color = "error",
+						alt = { "FIXME", "BUG", "FIXIT", "ISSUE" },
+					},
+					TODO = { icon = " ", color = "info" },
+					HACK = { icon = " ", color = "warning" },
+					WARN = { icon = " ", color = "warning", alt = { "WARNING", "XXX" } },
+					PERF = { icon = " ", color = "default", alt = { "OPTIM", "PERFORMANCE", "OPTIMIZE" } },
+					NOTE = { icon = " ", color = "hint", alt = { "INFO" } },
+					TEST = { icon = "⏲ ", color = "test", alt = { "TESTING", "PASSED", "FAILED" } },
+				},
+				colors = {
+					error = { "#DC2626" },
+					warning = { "#FBBF24" },
+					info = { "#10B981", "#2563EB" },
+					hint = { "#10B981" },
+					default = { "#7C3AED" },
+					test = { "#FF00FF" },
+				},
+			})
+
+			-- keymaps
+			vim.keymap.set("n", "]t", function()
+				require("todo-comments").jump_next()
+			end, { desc = "Next todo comment" })
+
+			vim.keymap.set("n", "[t", function()
+				require("todo-comments").jump_prev()
+			end, { desc = "Previous todo comment" })
+		end,
+		keys = {
+			{
+				"<leader>pt",
+				function()
+					Snacks.picker.todo_comments()
+				end,
+				desc = "Todo",
+				mode = { "n", "t" },
+			},
+			{
+				"<leader>pT",
+				function()
+					Snacks.picker.todo_comments({ keywords = { "TODO", "FIX", "FIXME" } })
+				end,
+				desc = "Todo/Fix/Fixme",
+				mode = { "n", "t" },
+			},
+		},
 	},
 }
