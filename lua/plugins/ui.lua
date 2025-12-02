@@ -17,9 +17,34 @@ return {
 		-- "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
 		"DivinerSun/lsp_lines.nvim",
 		config = function()
+			local icons = require("utils.icons").diagnostics
+
 			vim.diagnostic.config({
-				virtual_text = false,
-				virtual_lines = false,
+				virtual_text = {
+					spacing = 4,
+					prefix = "●",
+					severity = {
+						min = vim.diagnostic.severity.HINT,
+					},
+				},
+				virtual_lines = false, -- 默认关闭多行，按 <A-i> 切换
+				signs = {
+					text = {
+						[vim.diagnostic.severity.ERROR] = icons.Error,
+						[vim.diagnostic.severity.WARN] = icons.Warn,
+						[vim.diagnostic.severity.INFO] = icons.Info,
+						[vim.diagnostic.severity.HINT] = icons.Hint,
+					},
+				}, -- ⭐ 显示符号列图标
+				underline = true, -- ⭐ 下划线
+				update_in_insert = false,
+				severity_sort = true, -- ⭐ 按严重程度排序
+				float = {
+					border = "rounded",
+					source = true,
+					header = "",
+					prefix = "",
+				},
 			})
 
 			-- 切换多行显示LSP错误信息
@@ -54,10 +79,10 @@ return {
 			local diagnostics = {
 				"diagnostics",
 				symbols = {
-					error = icons.diagnostics.Error,
-					warn = icons.diagnostics.Warn,
-					info = icons.diagnostics.Info,
-					hint = icons.diagnostics.Hint,
+					error = icons.diagnostics.Error .. " ",
+					warn = icons.diagnostics.Warn .. " ",
+					info = icons.diagnostics.Info .. " ",
+					hint = icons.diagnostics.Hint .. " ",
 				},
 				colored = true,
 				update_in_insert = false,
@@ -67,9 +92,9 @@ return {
 			local diff = {
 				"diff",
 				symbols = {
-					added = icons.git.Added,
-					modified = icons.git.Modified,
-					removed = icons.git.Removed,
+					added = icons.git.Added .. " ",
+					modified = icons.git.Modified .. " ",
+					removed = icons.git.Removed .. " ",
 				},
 				source = function()
 					local gitsigns = vim.b.gitsigns_status_dict
@@ -139,6 +164,24 @@ return {
 						"lazy",
 						"mason",
 						statusline = { "dashboard", "alpha", "starter" },
+					},
+					refresh = {
+						statusline = 100,
+						tabline = 100,
+						winbar = 100,
+						refresh_time = 16, -- ~60fps
+						events = {
+							"WinEnter",
+							"BufEnter",
+							"BufWritePost",
+							"SessionLoadPost",
+							"FileChangedShellPost",
+							"VimResized",
+							"Filetype",
+							"CursorMoved",
+							"CursorMovedI",
+							"ModeChanged",
+						},
 					},
 					icons_enabled = true,
 					always_divide_middle = true,
@@ -220,9 +263,9 @@ return {
 
 					local function get_git_diff()
 						local icons_git = {
-							removed = icons.git.removed,
-							changed = icons.git.modified,
-							added = icons.git.added,
+							added = icons.git.Added,
+							changed = icons.git.Modified,
+							removed = icons.git.Removed,
 						}
 						local signs = vim.b[props.buf].gitsigns_status_dict
 						local labels = {}
@@ -274,9 +317,7 @@ return {
 					local res = {
 						{ get_diagnostic_label() },
 						{ get_git_diff() },
-						ft_icon and { " ", ft_icon, " ", guibg = ft_color, guifg = helpers.contrast_color(ft_color) }
-							or "",
-						" ",
+						{ (ft_icon or "") .. " ", guifg = ft_color, guibg = "none" },
 						{ filename, gui = modified and "bold,italic" or "bold" },
 						{ " ┊  " .. vim.api.nvim_win_get_number(props.win), group = "DevIconWindows" },
 						guibg = "#44406e",
