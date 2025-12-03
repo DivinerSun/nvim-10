@@ -23,19 +23,19 @@ keymap("n", "k", "v:count == 0 ? 'gk' : 'k'", { expr = true })
 keymap("v", "p", '"_dP', opts)
 
 -- 保存文件
-keymap("n", "<leader>w", ":w<CR>", { desc = "Save file" })
+keymap("n", "<leader>w", "<cmd>w<CR>", { desc = "Save file" })
 -- 退出
-keymap("n", "<leader>q", ":q<CR>", { desc = "Quit" })
+keymap("n", "<leader>qq", "<cmd>q<CR>", { desc = "Quit" })
 -- 强制退出
-keymap("n", "<leader>Q", ":qa!<CR>", { desc = "Force quit all" })
+keymap("n", "<leader>qa", "<cmd>qa!<CR>", { desc = "Force quit all" })
 -- 取消搜索高亮
-keymap("n", "<Esc>", ":nohl<CR>", { desc = "Clear highlights", silent = true })
+keymap("n", "<Esc>", "<cmd>nohl<CR>", { desc = "Clear highlights", silent = true })
 
 -- 移动选中文本
-keymap("v", "<A-j>", ":m '>+1<CR>gv=gv", { desc = "Move line down" })
-keymap("v", "<A-k>", ":m '<-2<CR>gv=gv", { desc = "Move line up" })
-keymap("n", "<A-j>", ":m .+1<CR>==", { desc = "Move line down" })
-keymap("n", "<A-k>", ":m .-2<CR>==", { desc = "Move line up" })
+keymap("v", "<A-j>", "<cmd>m '>+1<CR>gv=gv", { desc = "Move line down" })
+keymap("v", "<A-k>", "<cmd>m '<-2<CR>gv=gv", { desc = "Move line up" })
+keymap("n", "<A-j>", "<cmd>m .+1<CR>==", { desc = "Move line down" })
+keymap("n", "<A-k>", "<cmd>m .-2<CR>==", { desc = "Move line up" })
 
 -- 将下一行内容快速移动到行尾
 keymap("n", "J", "mzJ`z", opts)
@@ -53,19 +53,11 @@ keymap("v", "<", "<gv", opts)
 keymap("v", ">", ">gv", opts)
 
 -- Buffer 快捷键
-keymap("n", "<A-h>", ":bprevious<CR>", { desc = "Previous buffer" })
-keymap("n", "<A-l>", ":bnext<CR>", { desc = "Next buffer" })
-keymap("n", "Q", ":bdelete<CR>", { desc = "Delete buffer" })
+keymap("n", "<A-h>", "<cmd>bprevious<CR>", { desc = "Previous buffer" })
+keymap("n", "<A-l>", "<cmd>bnext<CR>", { desc = "Next buffer" })
+keymap("n", "Q", "<cmd>bdelete<CR>", { desc = "Delete buffer" })
 
 -- 分割窗口
-keymap("n", "<leader>sv", ":vsplit<CR>", { desc = "Split vertically" })
-keymap("n", "<leader>so", ":split<CR>", { desc = "Split horizontally" })
-keymap("n", "<leader>sx", ":close<CR>", { desc = "Close split" })
-
--- 文件内替换
-keymap(
-	"n",
-	"<leader>r",
-	[[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]],
-	{ desc = "Replace word cursor is on globally" }
-)
+keymap("n", "<leader>sv", "<cmd>vsplit<CR>", { desc = "Split vertically" })
+keymap("n", "<leader>so", "<cmd>split<CR>", { desc = "Split horizontally" })
+keymap("n", "<leader>sx", "<cmd>close<CR>", { desc = "Close split" })
