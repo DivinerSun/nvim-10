@@ -188,17 +188,6 @@ return {
 					},
 					list = {
 						selection = { preselect = true, auto_insert = true },
-						-- ⭐ 排序配置
-						sorting = {
-							-- 排序组件（按优先级）
-							components = {
-								"score", -- 按匹配分数
-								"kind", -- 按类型排序
-								"label", -- 按字母顺序
-								"source", -- 按来源
-								"sort_text", -- 使用 LSP sortText
-							},
-						},
 					},
 				},
 				signature = { enabled = true },
@@ -226,9 +215,30 @@ return {
 							module = "lazydev.integrations.blink",
 							score_offset = 100,
 						},
+						lsp = {
+							name = "LSP",
+							module = "blink.cmp.sources.lsp",
+							score_offset = 90,
+						},
+						path = {
+							name = "Path",
+							module = "blink.cmp.sources.path",
+							score_offset = 50,
+						},
+						snippets = {
+							name = "Snippets",
+							module = "blink.cmp.sources.snippets",
+							score_offset = 80,
+						},
+						buffer = {
+							name = "Buffer",
+							module = "blink.cmp.sources.buffer",
+							score_offset = 60,
+						},
 						avante = {
 							module = "blink-cmp-avante",
 							name = "Avante",
+							score_offset = 80,
 							opts = {},
 						},
 						digraphs = {
@@ -242,6 +252,7 @@ return {
 						ripgrep = {
 							module = "blink-ripgrep",
 							name = "Ripgrep",
+							score_offset = 10,
 							opts = {},
 						},
 						emoji = {
@@ -264,6 +275,7 @@ return {
 						css_vars = {
 							name = "CssVars",
 							module = "css-vars.blink",
+							score_offset = 5,
 							opts = {
 								search_extensions = {
 									".js",
