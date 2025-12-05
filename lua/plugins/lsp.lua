@@ -61,7 +61,15 @@ return {
 		},
 		opts = {
 			automatic_enable = true,
-			ensure_installed = { "lua_ls", "rust_analyzer" },
+			ensure_installed = {
+				"stylua",
+				"lua_ls",
+				"rust_analyzer",
+				"ruff",
+				"biome",
+				"ts_ls",
+				"denols",
+			},
 		},
 	},
 	{
