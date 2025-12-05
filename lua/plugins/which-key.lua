@@ -2,7 +2,19 @@ return {
 	{
 		"folke/which-key.nvim",
 		event = "VeryLazy",
-		opts = {},
+		opts = {
+			icons = { group = "" },
+			spec = {
+				{ "<leader>a", group = "AICode", icon = " " },
+				{ "<leader>f", group = "Find", icon = " " },
+				{ "<leader>g", group = "Git", icon = " " },
+				{ "<leader>q", group = "Session", icon = " " },
+				{ "<leader>s", group = "LSP", icon = "󰃡 " },
+				{ "<leader>u", group = "UI", icon = " " },
+				{ "<leader>p", group = "Preview/Paste", icon = " " },
+				{ "<leader>t", group = "Trouble", icon = "󱏛 " },
+			},
+		},
 		keys = {
 			{
 				"<leader>?",
@@ -24,13 +36,6 @@ return {
 				-- 	)
 				-- end,
 				desc = "Rename in current buffer only",
-			},
-			{
-				"<leader>ld",
-				function()
-					require("utils.func").toggle_lsp_diagnostics()
-				end,
-				desc = "Toggle LSP Info",
 			},
 		},
 	},

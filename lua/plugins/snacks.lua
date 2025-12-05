@@ -513,7 +513,7 @@ return {
 				desc = "Delete Buffer",
 			},
 			{
-				"<leader>cR",
+				"<leader>bR",
 				function()
 					Snacks.rename.rename_file()
 				end,

@@ -1,5 +1,6 @@
 return {
 	{ "nvim-mini/mini.nvim", version = false },
+	{ "nvim-mini/mini.icons", version = "*" },
 	{
 		"nvim-mini/mini.surround",
 		event = { "BufReadPre", "BufNewFile" },
