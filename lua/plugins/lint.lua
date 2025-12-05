@@ -8,13 +8,12 @@ return {
 			local eslint = lint.linters.eslint_d
 
 			lint.linters_by_ft = {
-				javascript = { "biome" },
-				typescript = { "biome" },
-				javascriptreact = { "biome" },
-				typescriptreact = { "biome" },
-				svelte = { "biome" },
-				vue = { "biome" },
-				rust = { "bacon" },
+				javascript = { "biomejs" },
+				typescript = { "biomejs" },
+				javascriptreact = { "biomejs" },
+				typescriptreact = { "biomejs" },
+				svelte = { "biomejs" },
+				vue = { "biomejs" },
 				python = { "ruff" },
 			}
 
