@@ -96,6 +96,8 @@ return {
 					fg = C.bg, -- 深色前景（文字）
 					bold = true, -- 加粗
 				}
+				highlights.Visual = { bg = "#3e4a7a", fg = "#ffffff" }
+				highlights.VisualNOS = { bg = "#3e4a7a" }
 			end,
 			cache = true,
 			plugins = {
@@ -188,6 +190,8 @@ return {
 						fg = C.bg, -- 深色前景（文字）
 						bold = true, -- 加粗
 					},
+					Visual = { bg = "#3e4a7a", fg = "#ffffff" },
+					VisualNOS = { bg = "#3e4a7a" },
 
 					-- 不同类型的颜色配置（格式：BlinkCmpKind + 类型名
 					BlinkCmpKindText = { fg = C.blue1 }, -- 蓝色

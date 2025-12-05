@@ -178,14 +178,12 @@ return {
 					},
 					opts = { skip = true },
 				},
-				-- 过滤 "w" 命令的所有输出
+				-- 过滤 img-clip 消息
 				{
 					filter = {
-						event = "msg_show",
 						any = {
-							{ find = "written" },
-							{ find = "%d+L, %d+B" },
-							{ find = "lines? --" },
+							{ event = "notify", find = "Content is not an image" },
+							{ event = "msg_show", find = "Content is not an image" },
 						},
 					},
 					opts = { skip = true },

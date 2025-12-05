@@ -25,6 +25,13 @@ return {
 				-- end,
 				desc = "Rename in current buffer only",
 			},
+			{
+				"<leader>ld",
+				function()
+					require("utils.func").toggle_lsp_diagnostics()
+				end,
+				desc = "Toggle LSP Info",
+			},
 		},
 	},
 }

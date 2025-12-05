@@ -67,6 +67,55 @@ return {
 			"Kaiser-Yang/blink-cmp-avante",
 			{
 				"roobert/tailwindcss-colorizer-cmp.nvim",
+				dependencies = {
+					-- 颜色插件
+					{
+						"catgoose/nvim-colorizer.lua",
+						event = "BufReadPre",
+						config = function()
+							require("colorizer").setup({
+								filetypes = { "*" },
+								buftypes = {},
+								user_commands = true,
+								lazy_load = false,
+								user_default_options = {
+									names = true,
+									names_opts = {
+										lowercase = true,
+										camelcase = true,
+										uppercase = true,
+										strip_digits = false,
+									},
+									names_custom = false,
+									RGB = true,
+									RGBA = true,
+									RRGGBB = true,
+									RRGGBBAA = true,
+									AARRGGBB = true,
+									rgb_fn = true,
+									hsl_fn = false,
+									oklch_fn = false,
+									css = true,
+									css_fn = true,
+									tailwind = true, -- boolean|'normal'|'lsp'|'both'
+									tailwind_opts = {
+										update_names = true,
+									},
+									sass = { enable = true, parsers = { "css" } },
+									xterm = true,
+									mode = "background", -- 'background'|'foreground'|'virtualtext'
+									virtualtext = "■",
+									virtualtext_inline = true, -- boolean|'before'|'after'
+									virtualtext_mode = "foreground", -- 'background'|'foreground'
+									always_update = false,
+									hooks = {
+										disable_line_highlight = false,
+									},
+								},
+							})
+						end,
+					},
+				},
 				config = function()
 					require("tailwindcss-colorizer-cmp").setup({
 						color_square_width = 2,
@@ -308,6 +357,12 @@ return {
 			vim.keymap.set("i", "<c-x>", function()
 				return vim.fn["codeium#Clear"]()
 			end, { expr = true, silent = true, desc = "Codeium Clear" })
+		end,
+	},
+	{
+		"olrtg/nvim-emmet",
+		config = function()
+			vim.keymap.set({ "n", "v" }, "<leader>xe", require("nvim-emmet").wrap_with_abbreviation)
 		end,
 	},
 }
