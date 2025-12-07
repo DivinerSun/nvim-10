@@ -7,6 +7,7 @@ return {
 			spec = {
 				{ "<leader>a", group = "AICode", icon = " " },
 				{ "<leader>b", group = "Buffer", icon = " " },
+				{ "<leader>c", group = "Codes", icon = " " },
 				{ "<leader>f", group = "Find", icon = " " },
 				{ "<leader>g", group = "Git", icon = " " },
 				{ "<leader>q", group = "Session", icon = " " },
