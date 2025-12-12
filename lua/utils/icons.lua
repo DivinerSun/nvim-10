@@ -2,23 +2,23 @@ local M = {}
 
 M.ui = {
 	Separator = "-",
-	Tab = "󰌒",
-	TabClose = "󰅝",
-	TabActive = "",
-	TabInactive = "󰅙",
+	Tab = "󰌒 ",
+	TabClose = "󰅝 ",
+	TabActive = " ",
+	TabInactive = "󰅙 ",
 }
 
 M.diagnostics = {
-	Error = "",
-	Warn = "",
-	Info = "",
-	Hint = "",
+  Error = " ",
+  Warn  = " ",
+  Hint = " ",
+  Info  = " ",
 }
 
 M.git = {
-	Added = "",
-	Modified = "󰬔",
-	Removed = "",
+  Added    = " ",
+  Modified = " ",
+  Removed  = " ",
 	Branch = "󱓎",
 }
 
@@ -223,5 +223,65 @@ M.kind_icons_game = {
 	Operator = "➕", -- 加号
 	TypeParameter = "🎨", -- 调色板
 }
+
+M.LazyIcons  = {
+    misc = {
+      dots = "󰇘",
+    },
+    ft = {
+      octo = " ",
+      gh = " ",
+      ["markdown.gh"] = " ",
+    },
+    dap = {
+      Stopped             = { "󰁕 ", "DiagnosticWarn", "DapStoppedLine" },
+      Breakpoint          = " ",
+      BreakpointCondition = " ",
+      BreakpointRejected  = { " ", "DiagnosticError" },
+      LogPoint            = ".>",
+    },
+    kinds = {
+      Array         = " ",
+      Boolean       = "󰨙 ",
+      Class         = " ",
+      Codeium       = "󰘦 ",
+      Color         = " ",
+      Control       = " ",
+      Collapsed     = " ",
+      Constant      = "󰏿 ",
+      Constructor   = " ",
+      Copilot       = " ",
+      Enum          = " ",
+      EnumMember    = " ",
+      Event         = " ",
+      Field         = " ",
+      File          = " ",
+      Folder        = " ",
+      Function      = "󰊕 ",
+      Interface     = " ",
+      Key           = " ",
+      Keyword       = " ",
+      Method        = "󰊕 ",
+      Module        = " ",
+      Namespace     = "󰦮 ",
+      Null          = " ",
+      Number        = "󰎠 ",
+      Object        = " ",
+      Operator      = " ",
+      Package       = " ",
+      Property      = " ",
+      Reference     = " ",
+      Snippet       = "󱄽 ",
+      String        = " ",
+      Struct        = "󰆼 ",
+      Supermaven    = " ",
+      TabNine       = "󰏚 ",
+      Text          = " ",
+      TypeParameter = " ",
+      Unit          = " ",
+      Value         = " ",
+      Variable      = "󰀫 ",
+    },
+  }
 
 return M
