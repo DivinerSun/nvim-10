@@ -1,27 +1,27 @@
 return {
-  {
-    "folke/which-key.nvim",
-    event = "VeryLazy",
-    opts_extend = { "spec" },
-    opts = {
-      preset = "helix",
+	{
+		"folke/which-key.nvim",
+		event = "VeryLazy",
+		opts_extend = { "spec" },
+		opts = {
+			preset = "helix",
 			icons = { group = "" },
-      spec = {
-        {
-          mode = { "n", "x" },
-          -- { "<leader>a", group = "AICode", icon = " " },
-          -- { "<leader>b", group = "Buffer", icon = " " },
-          -- { "<leader>c", group = "Codes", icon = " " },
-          -- { "<leader>f", group = "Find", icon = " " },
-          -- { "<leader>g", group = "Git", icon = " " },
-          { "<leader>q", group = "Session", icon = " " },
-          { "<leader>s", group = "Split", icon = " " },
-          -- { "<leader>u", group = "UI", icon = " " },
-          -- { "<leader>p", group = "Preview/Paste", icon = " " },
-          -- { "<leader>t", group = "Trouble", icon = "󱏛 " },
-        }
-      },
-    },
+			spec = {
+				{
+					mode = { "n", "x" },
+					-- { "<leader>a", group = "AICode", icon = " " },
+					-- { "<leader>b", group = "Buffer", icon = " " },
+					-- { "<leader>c", group = "Codes", icon = " " },
+					-- { "<leader>f", group = "Find", icon = " " },
+					-- { "<leader>g", group = "Git", icon = " " },
+					{ "<leader>q", group = "Session", icon = " " },
+					{ "<leader>s", group = "Split", icon = " " },
+					-- { "<leader>u", group = "UI", icon = " " },
+					-- { "<leader>p", group = "Preview/Paste", icon = " " },
+					-- { "<leader>t", group = "Trouble", icon = "󱏛 " },
+				},
+			},
+		},
 		keys = {
 			{
 				"<leader>?",
@@ -36,9 +36,9 @@ return {
 				desc = "Rename in current buffer only",
 			},
 		},
-    config = function(_, opts)
-      local wk = require("which-key")
-      wk.setup(opts)
-    end,
-  },
+		config = function(_, opts)
+			local wk = require("which-key")
+			wk.setup(opts)
+		end,
+	},
 }

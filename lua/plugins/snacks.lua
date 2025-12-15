@@ -1,5 +1,5 @@
 return {
-  {
+	{
 		"folke/snacks.nvim",
 		priority = 1000,
 		lazy = false,
@@ -56,7 +56,7 @@ return {
 			words = { enabled = true },
 			styles = {
 				notification = {
-					-- wo = { wrap = true } -- Wrap notifications
+					wo = { wrap = true }, -- Wrap notifications
 				},
 			},
 		},
@@ -69,13 +69,13 @@ return {
 				end,
 				desc = "Smart Find Files",
 			},
-      {
-        "<leader>;",
-        function()
-          Snacks.picker.actions.qflist()
-        end,
-        desc = "Code Action",
-      },
+			{
+				"<leader>;",
+				function()
+					Snacks.picker.actions.qflist()
+				end,
+				desc = "Code Action",
+			},
 			{
 				"<leader>,",
 				function()
