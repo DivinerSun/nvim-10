@@ -1,4 +1,13 @@
 return {
+	-- LSP 信息多行显示
+	{
+		"DivinerSun/lsp_lines.nvim",
+		config = function()
+			-- 切换多行显示LSP错误信息
+			vim.keymap.set("", "<A-i>", require("lsp_lines").toggle, { desc = "Toggle lsp_lines" })
+			require("lsp_lines").setup()
+		end,
+	},
 	-- lspconfig
 	{
 		"neovim/nvim-lspconfig",
