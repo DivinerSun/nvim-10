@@ -205,6 +205,7 @@ return {
 		end,
 		config = vim.schedule_wrap(function(_, opts)
 			local funcs = require("utils/funcs")
+			local icons = require("utils/icons")
 
 			funcs.register(funcs.formatter())
 
@@ -275,8 +276,8 @@ return {
 			local have_mason = funcs.has("mason-lspconfig.nvim")
 			local mason_all = have_mason
 					and vim.tbl_keys(require("mason-lspconfig.mappings").get_mason_map().lspconfig_to_package)
-				or {} --[[ @as string[] ]]
-			local mason_exclude = {} ---@type string[]
+				or {}
+			local mason_exclude = {}
 
 			---@return boolean? exclude automatic setup
 			local function configure(server)
@@ -284,7 +285,7 @@ return {
 					return false
 				end
 				local sopts = opts.servers[server]
-				sopts = sopts == true and {} or (not sopts) and { enabled = false } or sopts --[[@as lazyvim.lsp.Config]]
+				sopts = sopts == true and {} or (not sopts) and { enabled = false } or sopts
 
 				if sopts.enabled == false then
 					mason_exclude[#mason_exclude + 1] = server

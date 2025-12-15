@@ -6,7 +6,7 @@ return {
 		branch = "master",
 		lazy = false,
 		build = ":TSUpdate",
-		config = function()
+		config = function(opts)
 			local configs = require("nvim-treesitter.configs")
 			local funcs = require("utils/funcs")
 
@@ -46,6 +46,8 @@ return {
 				},
 				auto_install = true,
 				sync_install = false,
+				ignore_install = {},
+				modules = {},
 				highlight = { enable = true },
 				indent = { enable = true },
 				folds = { enable = true },
@@ -101,6 +103,11 @@ return {
 		init = function()
 			local configs = require("nvim-treesitter.configs")
 			configs.setup({
+				sync_install = true,
+				auto_install = true,
+				ensure_installed = {},
+				ignore_install = {},
+				modules = {},
 				textobjects = {
 					select = {
 						enable = true,
