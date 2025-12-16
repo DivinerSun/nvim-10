@@ -8,7 +8,7 @@ return {
 		build = ":TSUpdate",
 		config = function(opts)
 			local configs = require("nvim-treesitter.configs")
-			local funcs = require("utils/funcs")
+			local funcs = require("utils.funcs")
 
 			configs.setup({
 				ensure_installed = {

@@ -18,8 +18,8 @@ return {
 		},
 		opts_extend = { "servers.*.keys" },
 		opts = function()
-			local icons = require("utils/icons")
-			local funcs = require("utils/funcs")
+			local icons = require("utils.icons")
+			local funcs = require("utils.funcs")
 
 			local ret = {
 				diagnostics = {
@@ -213,8 +213,8 @@ return {
 			return ret
 		end,
 		config = vim.schedule_wrap(function(_, opts)
-			local funcs = require("utils/funcs")
-			local icons = require("utils/icons")
+			local funcs = require("utils.funcs")
+			local icons = require("utils.icons")
 
 			funcs.register(funcs.formatter())
 

@@ -11,7 +11,7 @@ return {
 			markdown = true,
 		},
 		config = function(_, opts)
-			local funcs = require("utils/funcs")
+			local funcs = require("utils.funcs")
 			funcs.pairs(opts)
 		end,
 	},
@@ -31,7 +31,7 @@ return {
 		event = "VeryLazy",
 		opts = function()
 			local ai = require("mini.ai")
-			local funcs = require("utils/funcs")
+			local funcs = require("utils.funcs")
 
 			return {
 				n_lines = 500,
@@ -60,7 +60,7 @@ return {
 			}
 		end,
 		config = function(_, opts)
-			local funcs = require("utils/funcs")
+			local funcs = require("utils.funcs")
 			require("mini.ai").setup(opts)
 			funcs.on_load("which-key.nvim", function()
 				vim.schedule(function()
