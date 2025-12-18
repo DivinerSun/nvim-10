@@ -64,7 +64,7 @@ return {
 						local twd_formatter = require("tailwindcss-colorizer-cmp").formatter
 
 						vim_item.icon = (icons.LazyIcons.kinds[vim_item.kind] or "")
-						vim_item.kind = vim_item.kind .. " 🔚"
+						vim_item.kind = vim_item.kind .. " "
 
 						return twd_formatter(entry, vim_item)
 					end,
