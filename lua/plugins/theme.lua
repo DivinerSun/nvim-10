@@ -60,6 +60,16 @@ return {
 				treesitter_context = true,
 				which_key = true,
 			},
+			-- 自定义颜色高亮值
+			custom_highlights = function(C)
+				C.comment = "#FF81D0"
+				C.fg_gutter = "#813c85"
+
+				return {
+					Comment = { fg = C.comment },
+					Pmenu = { bg = C.none },
+				}
+			end,
 		},
 	},
 }
