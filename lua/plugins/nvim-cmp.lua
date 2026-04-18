@@ -54,7 +54,11 @@ return {
 						winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,Search:None",
 						border = "rounded",
 						side_padding = 2,
-						max_height = 100,
+						max_height = 15,
+					},
+					documentation = {
+						scrollbar = true,
+						max_height = 15,
 					},
 				},
 				formatting = {

@@ -31,10 +31,12 @@ return {
 				local timer = vim.uv.new_timer()
 				return function(...)
 					local argv = { ... }
-					timer:start(ms, 0, function()
-						timer:stop()
-						vim.schedule_wrap(fn)(unpack(argv))
-					end)
+					if timer ~= nil then
+						timer:start(ms, 0, function()
+							timer:stop()
+							vim.schedule_wrap(fn)(unpack(argv))
+						end)
+					end
 				end
 			end
 
@@ -55,8 +57,9 @@ return {
 				ctx.dirname = vim.fn.fnamemodify(ctx.filename, ":h")
 				names = vim.tbl_filter(function(name)
 					local linter = lint.linters[name]
+					local funcs = require("utils.funcs")
 					if not linter then
-						LazyVim.warn("Linter not found: " .. name, { title = "nvim-lint" })
+						funcs.warn("Linter not found: " .. name, { title = "nvim-lint" })
 					end
 					return linter and not (type(linter) == "table" and linter.condition and not linter.condition(ctx))
 				end, names)

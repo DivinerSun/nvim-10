@@ -61,6 +61,9 @@ vim.opt.writebackup = false -- 保存时不创建备份
 vim.opt.swapfile = false -- 不创建交换文件
 vim.opt.undofile = true -- 持久化 undo 历史
 
+-- 启用 biome Mason也需要安装
+vim.lsp.enable("biome")
+
 -- 适配 Neovide
 if vim.g.neovide then
 	local alpha = function()
