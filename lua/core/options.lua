@@ -2,12 +2,12 @@
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
--- 禁用 netrw banner
-vim.cmd("let g:netrw_banner = 0")
+-- 设置主题
+vim.cmd.colorscheme("catppuccin")
+vim.opt.background = "dark" -- 设置背景
 
 -- 终端 GUI
 vim.opt.termguicolors = true -- 启用真彩色
-vim.opt.background = "dark" -- 设置背景
 vim.opt.mouse = "a" -- 启用鼠标
 vim.opt.clipboard = "unnamedplus" -- 使用系统剪贴板
 vim.opt.guifont = "FiraCode Nerd Font:h18" -- 设置 GUI 字体(如果使用了 GUI)
@@ -60,9 +60,6 @@ vim.opt.backup = false -- 不创建备份文件
 vim.opt.writebackup = false -- 保存时不创建备份
 vim.opt.swapfile = false -- 不创建交换文件
 vim.opt.undofile = true -- 持久化 undo 历史
-
--- 启用 biome Mason也需要安装
-vim.lsp.enable("biome")
 
 -- 适配 Neovide
 if vim.g.neovide then

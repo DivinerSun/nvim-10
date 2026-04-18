@@ -54,6 +54,6 @@ keymap("n", "<A-l>", "<cmd>bnext<CR>", { desc = "Next buffer" })
 keymap("n", "Q", "<cmd>bdelete<CR>", { desc = "Delete buffer" })
 
 -- 分割窗口
-keymap("n", "<leader>sv", "<cmd>vsplit<CR>", { desc = "Split vertically" })
-keymap("n", "<leader>so", "<cmd>split<CR>", { desc = "Split horizontally" })
+keymap("n", "<leader>sh", "<cmd>vsplit<CR>", { desc = "Split horizontally" })
+keymap("n", "<leader>sv", "<cmd>split<CR>", { desc = "Split vertically" })
 keymap("n", "<leader>sx", "<cmd>close<CR>", { desc = "Close split" })
