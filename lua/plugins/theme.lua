@@ -1,4 +1,13 @@
-require("catppuccin").setup({
+return {
+  "catppuccin/nvim",
+  name = "catppuccin",
+  priority = 1000,
+  init = function()
+    -- 设置主题
+    -- vim.cmd.colorscheme "catppuccin-nvim"
+    vim.cmd.colorscheme("catppuccin-nvim")
+  end,
+  opts = {
   flavour = "auto", -- latte, frappe, macchiato, mocha
   background = { -- :h background
     light = "latte",
@@ -74,7 +83,6 @@ require("catppuccin").setup({
         indentscope_color = "",
     },
   },
-})
+  }
+}
 
--- setup must be called before loading
-vim.cmd.colorscheme "catppuccin-nvim"
