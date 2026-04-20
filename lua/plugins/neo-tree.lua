@@ -18,7 +18,11 @@ require('neo-tree').setup({
       ["<esc>"] = "cancel",
     },
 	},
-  nesting_rules = require('neotree-file-nesting-config').nesting_rules,
+  config = function(_, opts)
+    -- Adding rules from plugin
+    opts.nesting_rules = require('neotree-file-nesting-config').nesting_rules
+    require('neo-tree').setup(opts)
+  end,
 })
 
 vim.keymap.set("n", "<leader>e", "<Cmd>Neotree toggle reveal<CR>", { desc = "Toggle File Tree" })

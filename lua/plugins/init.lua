@@ -10,10 +10,13 @@ vim.pack.add({
   },
   -- neo-tree dep
   "https://github.com/saifulapm/neotree-file-nesting-config",
+
+  { src = "https://github.com/catppuccin/nvim", name = "catppuccin" },
 })
 
 
 
 
 -- Import Plugins Config
+require("plugins/theme")
 require("plugins/neo-tree")
