@@ -10,7 +10,8 @@ vim.opt.background = "dark" -- 设置背景
 vim.opt.termguicolors = true -- 启用真彩色
 vim.opt.mouse = "a" -- 启用鼠标
 vim.opt.clipboard = "unnamedplus" -- 使用系统剪贴板
-vim.opt.guifont = "FiraCode Nerd Font:h18" -- 设置 GUI 字体(如果使用了 GUI)
+-- vim.opt.guifont = "FiraCode Nerd Font:h18" -- 设置 GUI 字体(如果使用了 GUI)
+vim.opt.guifont = "VictorMono Nerd Font:h20" -- 设置 GUI 字体(如果使用了 GUI)
 vim.opt.guicursor = { -- 光标形状
 	"n-v-c:block", -- Normal, Visual, Command 模式：方块
 	"i-ci-ve:ver25", -- Insert, Command-line Insert, Visual-exclude: 竖线
