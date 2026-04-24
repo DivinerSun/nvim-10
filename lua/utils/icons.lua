@@ -11,7 +11,7 @@ M.ui = {
 M.diagnostics = {
 	Error = " ",
 	Warn = " ",
-	Hint = " ",
+	Hint = " ",
 	Info = " ",
 }
 

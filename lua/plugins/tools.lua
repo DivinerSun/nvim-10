@@ -43,7 +43,7 @@ return {
 			position = "bottom-right",
 
 			keyformat = {
-				["<BS>"] = "󰁮 ",
+				["<BS>"] = "",
 				["<CR>"] = "󰘌",
 				["<Space>"] = "󱁐",
 				["<Up>"] = "󰁝",
