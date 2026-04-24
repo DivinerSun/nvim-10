@@ -107,5 +107,52 @@ return {
 			end
 		end,
 	},
+	-- 颜色插件
+	{
+		"catgoose/nvim-colorizer.lua",
+		event = "BufReadPre",
+    dependi = {
+      {
+        "roobert/tailwindcss-colorizer-cmp.nvim",
+        config = function()
+          require("tailwindcss-colorizer-cmp").setup({
+            color_square_width = 2,
+          })
+        end
+      }
+    },
+		opts = {
+      filetypes = { "*" },
+      buftypes = {},
+      user_commands = true,
+      lazy_load = false,
+      user_default_options = {
+        names = true,
+        names_opts = {
+          lowercase = true,
+          camelcase = true,
+          uppercase = false,
+          strip_digits = false,
+        },
+        names_custom = false,
+        RGB = true,
+        RGBA = true,
+        RRGGBB = true,
+        RRGGBBAA = true,
+        AARRGGBB = true,
+        rgb_fn = true,
+        hsl_fn = true,
+        oklch_fn = true,
+        css = true,
+        css_fn = true,
+        tailwind = true,
+        tailwind_opts = {
+          update_names = false,
+        },
+        sass = { enable = true, parsers = { "css" } },
+        mode = "background",
+      },
+    }
+	},
 }
 
