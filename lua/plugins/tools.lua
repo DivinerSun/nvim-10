@@ -200,5 +200,21 @@ return {
       { "<leader>sT", "<cmd>TodoTelescope keywords=TODO,FIX,FIXME<cr>", desc = "Todo/Fix/Fixme" },
     },
 	},
+  -- 计时器
+  {
+    "nvzone/timerly",
+    dependencies = 'nvzone/volt',
+    cmd = "TimerlyToggle",
+    opts = function()
+      vim.api.nvim_create_user_command("Timer", function()
+        vim.o.showtabline = 0
+        vim.o.laststatus = 0
+        vim.wo.number = false
+        vim.o.scl = "no"
+        vim.o.cmdheight = 0
+        vim.cmd "TimerlyToggle"
+      end, {})
+    end,
+  },
 }
 
