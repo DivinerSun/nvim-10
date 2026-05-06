@@ -37,6 +37,8 @@ vim.opt.smartcase = true -- 智能大小写
 vim.opt.splitright = true -- 在右侧分割新窗口
 vim.opt.splitbelow = true -- 在下方分割新窗口
 
+vim.opt.winborder = "rounded" -- 设置浮动窗口的边框
+
 -- 编辑行为
 vim.opt.tabstop = 2 -- Tab 宽度（Tab 字符显示的空格数）
 vim.opt.softtabstop = 2 -- 编辑时 Tab 的宽度

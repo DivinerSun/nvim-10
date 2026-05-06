@@ -3,7 +3,7 @@ return {
 	event = "VeryLazy",
 	config = function()
 		require("nvim-web-devicons").setup({
-		-- yes, this is all the icons w/ an extra space
+			-- yes, this is all the icons w/ an extra space
 			override = {
 				["default_icon"] = {
 					icon = "󱔗 ",

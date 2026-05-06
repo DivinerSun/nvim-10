@@ -68,20 +68,20 @@ return {
 			shade_filetypes = {},
 			shade_terminals = true,
 			shading_factor = 2,
-      shading_ratio = 6,
+			shading_ratio = 6,
 			start_in_insert = true,
 			insert_mappings = true,
 			persist_size = true,
-      persist_mode = true,
+			persist_mode = true,
 			direction = "float",
 			close_on_exit = true,
 			shell = vim.o.shell,
-      auto_scroll = true,
+			auto_scroll = true,
 			float_opts = {
 				border = "curved", -- 'single' | 'double' | 'shadow' | 'curved'
 				winblend = 3,
-        zindex = 99,
-        title_pos = "center",
+				zindex = 99,
+				title_pos = "center",
 			},
 		},
 	},
@@ -111,110 +111,126 @@ return {
 	{
 		"catgoose/nvim-colorizer.lua",
 		event = "BufReadPre",
-    dependi = {
-      {
-        "roobert/tailwindcss-colorizer-cmp.nvim",
-        config = function()
-          require("tailwindcss-colorizer-cmp").setup({
-            color_square_width = 2,
-          })
-        end
-      }
-    },
+		dependi = {
+			{
+				"roobert/tailwindcss-colorizer-cmp.nvim",
+				config = function()
+					require("tailwindcss-colorizer-cmp").setup({
+						color_square_width = 2,
+					})
+				end,
+			},
+		},
 		opts = {
-      filetypes = { "*" },
-      buftypes = {},
-      user_commands = true,
-      lazy_load = false,
-      user_default_options = {
-        names = true,
-        names_opts = {
-          lowercase = true,
-          camelcase = true,
-          uppercase = false,
-          strip_digits = false,
-        },
-        names_custom = false,
-        RGB = true,
-        RGBA = true,
-        RRGGBB = true,
-        RRGGBBAA = true,
-        AARRGGBB = true,
-        rgb_fn = true,
-        hsl_fn = true,
-        oklch_fn = true,
-        css = true,
-        css_fn = true,
-        tailwind = true,
-        tailwind_opts = {
-          update_names = false,
-        },
-        sass = { enable = true, parsers = { "css" } },
-        mode = "background",
-      },
-    }
+			filetypes = { "*" },
+			buftypes = {},
+			user_commands = true,
+			lazy_load = false,
+			user_default_options = {
+				names = true,
+				names_opts = {
+					lowercase = true,
+					camelcase = true,
+					uppercase = false,
+					strip_digits = false,
+				},
+				names_custom = false,
+				RGB = true,
+				RGBA = true,
+				RRGGBB = true,
+				RRGGBBAA = true,
+				AARRGGBB = true,
+				rgb_fn = true,
+				hsl_fn = true,
+				oklch_fn = true,
+				css = true,
+				css_fn = true,
+				tailwind = true,
+				tailwind_opts = {
+					update_names = false,
+				},
+				sass = { enable = true, parsers = { "css" } },
+				mode = "background",
+			},
+		},
 	},
-  {
-    "folke/trouble.nvim",
-    cmd = "Trouble",
-    opts = {},
-  },
-  {
-    'nvim-telescope/telescope.nvim', version = '*',
-    dependencies = {
-      'nvim-lua/plenary.nvim',
-      { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
-    },
-    opts = function()
-      local actions = require("telescope.actions")
-      return {
-        defaults = {
-          mappings = {
-            i = {
-              ["<C-j>"] = actions.move_selection_next,
-              ["<C-k>"] = actions.move_selection_previous,
-              ["<C-l>"] = actions.preview_scrolling_right,
-              ["<C-h>"] = actions.preview_scrolling_left,
-            }
-          }
-        },
-      }
-    end,
-  },
-  {
-    "ibhagwan/fzf-lua",
-    dependencies = { "nvim-tree/nvim-web-devicons" },
-    opts = {}
-  },
-  {
+	{
+		"folke/trouble.nvim",
+		cmd = "Trouble",
+		opts = {},
+	},
+	{
+		"nvim-telescope/telescope.nvim",
+		version = "*",
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+			{ "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
+		},
+		opts = function()
+			local actions = require("telescope.actions")
+			return {
+				defaults = {
+					mappings = {
+						i = {
+							["<C-j>"] = actions.move_selection_next,
+							["<C-k>"] = actions.move_selection_previous,
+							["<C-l>"] = actions.preview_scrolling_right,
+							["<C-h>"] = actions.preview_scrolling_left,
+						},
+					},
+				},
+			}
+		end,
+	},
+	{
+		"ibhagwan/fzf-lua",
+		dependencies = { "nvim-tree/nvim-web-devicons" },
+		opts = {},
+	},
+	{
 		"folke/todo-comments.nvim",
 		cmd = { "TodoTrouble", "TodoTelescope" },
 		event = { "BufReadPre", "BufNewFile" },
 		opts = {},
-    keys = {
-      { "]t", function() require("todo-comments").jump_next() end, desc = "Next Todo Comment" },
-      { "[t", function() require("todo-comments").jump_prev() end, desc = "Previous Todo Comment" },
-      { "<leader>xt", "<cmd>Trouble todo toggle<cr>", desc = "Todo (Trouble)" },
-      { "<leader>xT", "<cmd>Trouble todo toggle filter = {tag = {TODO,FIX,FIXME}}<cr>", desc = "Todo/Fix/Fixme (Trouble)" },
-      { "<leader>st", "<cmd>TodoTelescope<cr>", desc = "Todo" },
-      { "<leader>sT", "<cmd>TodoTelescope keywords=TODO,FIX,FIXME<cr>", desc = "Todo/Fix/Fixme" },
-    },
+		keys = {
+			{
+				"]t",
+				function()
+					require("todo-comments").jump_next()
+				end,
+				desc = "Next Todo Comment",
+			},
+			{
+				"[t",
+				function()
+					require("todo-comments").jump_prev()
+				end,
+				desc = "Previous Todo Comment",
+			},
+			{ "<leader>xt", "<cmd>Trouble todo toggle<cr>", desc = "Todo (Trouble)" },
+			{
+				"<leader>xT",
+				"<cmd>Trouble todo toggle filter = {tag = {TODO,FIX,FIXME}}<cr>",
+				desc = "Todo/Fix/Fixme (Trouble)",
+			},
+			{ "<leader>st", "<cmd>TodoTelescope<cr>", desc = "Todo" },
+			{ "<leader>sT", "<cmd>TodoTelescope keywords=TODO,FIX,FIXME<cr>", desc = "Todo/Fix/Fixme" },
+		},
 	},
-  -- 计时器
-  {
-    "nvzone/timerly",
-    dependencies = 'nvzone/volt',
-    cmd = "TimerlyToggle",
-    opts = function()
-      vim.api.nvim_create_user_command("Timer", function()
-        vim.o.showtabline = 0
-        vim.o.laststatus = 0
-        vim.wo.number = false
-        vim.o.scl = "no"
-        vim.o.cmdheight = 0
-        vim.cmd "TimerlyToggle"
-      end, {})
-    end,
-  },
+	-- 计时器
+	{
+		"nvzone/timerly",
+		dependencies = "nvzone/volt",
+		cmd = "TimerlyToggle",
+		opts = function()
+			vim.api.nvim_create_user_command("Timer", function()
+				vim.o.showtabline = 0
+				vim.o.laststatus = 0
+				vim.wo.number = false
+				vim.o.scl = "no"
+				vim.o.cmdheight = 0
+				vim.cmd("TimerlyToggle")
+			end, {})
+		end,
+	},
 }
-

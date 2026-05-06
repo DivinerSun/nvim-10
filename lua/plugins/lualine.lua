@@ -1,5 +1,5 @@
 return {
-  -- 自定义底部状态栏
+	-- 自定义底部状态栏
 	{
 		"nvim-lualine/lualine.nvim",
 		dependencies = { "nvim-tree/nvim-web-devicons" },

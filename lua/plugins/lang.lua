@@ -1,6 +1,6 @@
 return {
-  -- Lua
-  {
+	-- Lua
+	{
 		"folke/lazydev.nvim",
 		ft = "lua",
 		cmd = "LazyDev",
@@ -13,8 +13,8 @@ return {
 			},
 		},
 	},
-  -- Rust
-  {
+	-- Rust
+	{
 		"mrcjkb/rustaceanvim",
 		version = "^9",
 		lazy = false,
@@ -26,8 +26,8 @@ return {
 			require("crates").setup({})
 		end,
 	},
-  -- Markdown
-  {
+	-- Markdown
+	{
 		"MeanderingProgrammer/render-markdown.nvim",
 		dependencies = {
 			"nvim-lua/plenary.nvim",
