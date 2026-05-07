@@ -18,6 +18,7 @@ return {
 			ensure_installed = {
 				"stylua",
 				"shfmt",
+				"cspell-lsp",
 				"emmet-language-server",
 				"taplo",
 				"tailwindcss-language-server",
@@ -77,6 +78,36 @@ return {
 		dependencies = { "saghen/blink.cmp" },
 		opts = {
 			servers = {
+				cspell_ls = {
+					filetypes = {
+						"astro",
+						"css",
+						"gitcommit",
+						"go",
+						"html",
+						"javascript",
+						"javascriptreact",
+						"json",
+						"jsonc",
+						"lua",
+						"markdown",
+						"python",
+						"rust",
+						"scss",
+						"svelte",
+						"toml",
+						"typescript",
+						"typescriptreact",
+						"vue",
+						"yaml",
+					},
+					settings = {
+						cspell = {
+							enabled = true,
+							diagnosticLevel = "Hint",
+						},
+					},
+				},
 				lua_ls = {},
 				ts_ls = {
 					filetypes = {
