@@ -18,6 +18,7 @@ return {
 			ensure_installed = {
 				"stylua",
 				"shfmt",
+				"emmet-language-server",
 				"taplo",
 				"tailwindcss-language-server",
 				"typescript-language-server",

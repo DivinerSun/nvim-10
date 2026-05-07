@@ -26,6 +26,43 @@ return {
 			require("crates").setup({})
 		end,
 	},
+	-- Emmet
+	{
+		"mattn/emmet-vim",
+		ft = {
+			"astro",
+			"html",
+			"javascriptreact",
+			"svelte",
+			"typescriptreact",
+			"vue",
+		},
+		init = function()
+			vim.g.user_emmet_install_global = 0
+			vim.g.user_emmet_mode = "inv"
+			vim.g.user_emmet_expandabbr_key = "<C-e>"
+			vim.g.user_emmet_settings = {
+				astro = { extends = "html" },
+				javascriptreact = { extends = "jsx" },
+				typescriptreact = { extends = "jsx" },
+				vue = { extends = "html" },
+			}
+		end,
+		config = function()
+			vim.api.nvim_create_autocmd("FileType", {
+				group = vim.api.nvim_create_augroup("emmet_install", { clear = true }),
+				pattern = {
+					"astro",
+					"html",
+					"javascriptreact",
+					"svelte",
+					"typescriptreact",
+					"vue",
+				},
+				command = "EmmetInstall",
+			})
+		end,
+	},
 	-- Markdown
 	{
 		"MeanderingProgrammer/render-markdown.nvim",
