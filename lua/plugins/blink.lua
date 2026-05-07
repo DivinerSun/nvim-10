@@ -3,6 +3,9 @@ return {
 	{
 		"Exafunction/windsurf.vim",
 		event = "BufEnter",
+		init = function()
+			vim.g.codeium_disable_bindings = 1
+		end,
 		config = function()
 			vim.keymap.set("i", "<C-g>", function()
 				return vim.fn["codeium#Accept"]()
@@ -10,17 +13,6 @@ return {
 			vim.keymap.set("i", "<c-x>", function()
 				return vim.fn["codeium#Clear"]()
 			end, { expr = true, silent = true, desc = "Codeium Clear" })
-		end,
-	},
-	{
-		"roobert/tailwindcss-colorizer-cmp.nvim",
-		config = function()
-			require("tailwindcss-colorizer-cmp").setup({
-				color_square_width = 2,
-			})
-			require("blink.cmp.config").formatting = {
-				format = require("tailwindcss-colorizer-cmp").formatter,
-			}
 		end,
 	},
 	{
@@ -52,8 +44,8 @@ return {
 		opts = {
 			keymap = {
 				preset = "enter",
-				["<Tab>"] = { "select_next", "fallback" },
-				["<S-Tab>"] = { "select_prev", "fallback" },
+				["<Tab>"] = { "select_next", "snippet_forward", "fallback" },
+				["<S-Tab>"] = { "select_prev", "snippet_backward", "fallback" },
 				["<C-j>"] = {
 					function(cmp)
 						cmp.select_next({ count = 5 })
@@ -97,6 +89,8 @@ return {
 										if dev_icon then
 											icon = dev_icon
 										end
+									elseif ctx.kind == "Color" then
+										icon = "██"
 									else
 										icon = require("lspkind").symbol_map[ctx.kind] or ""
 									end
@@ -109,6 +103,30 @@ return {
 										local dev_icon, dev_hl = require("nvim-web-devicons").get_icon(ctx.label)
 										if dev_icon then
 											hl = dev_hl
+										end
+									elseif ctx.kind == "Color" then
+										local doc = ctx.item and ctx.item.documentation
+										local content
+										if type(doc) == "string" then
+											content = doc
+										elseif type(doc) == "table" then
+											content = doc.value
+										end
+										if content then
+											local hex = content:match("#%x%x%x%x%x%x") or content:match("#%x%x%x")
+											if hex and #hex == 4 then
+												hex = "#"
+													.. hex:sub(2, 2):rep(2)
+													.. hex:sub(3, 3):rep(2)
+													.. hex:sub(4, 4):rep(2)
+											end
+											if hex then
+												local hl_name = "BlinkCmpKindTw_" .. hex:sub(2)
+												if vim.fn.hlexists(hl_name) == 0 then
+													vim.api.nvim_set_hl(0, hl_name, { fg = hex })
+												end
+												hl = hl_name
+											end
 										end
 									end
 									return hl

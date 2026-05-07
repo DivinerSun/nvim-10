@@ -111,16 +111,6 @@ return {
 	{
 		"catgoose/nvim-colorizer.lua",
 		event = "BufReadPre",
-		dependi = {
-			{
-				"roobert/tailwindcss-colorizer-cmp.nvim",
-				config = function()
-					require("tailwindcss-colorizer-cmp").setup({
-						color_square_width = 2,
-					})
-				end,
-			},
-		},
 		opts = {
 			filetypes = { "*" },
 			buftypes = {},
