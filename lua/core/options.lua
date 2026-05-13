@@ -2,10 +2,6 @@
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
--- 设置主题
-vim.cmd.colorscheme("catppuccin")
-vim.opt.background = "dark" -- 设置背景
-
 -- 终端 GUI
 vim.opt.termguicolors = true -- 启用真彩色
 vim.opt.mouse = "a" -- 启用鼠标
