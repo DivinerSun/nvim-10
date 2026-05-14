@@ -29,7 +29,32 @@ vim.diagnostic.config({
 
 cmp.setup({
 	keymap = {
-		preset = "default",
+		preset = "none",
+		["<CR>"] = { "accept", "fallback" },
+		["<Tab>"] = { "select_next", "snippet_forward", "fallback" },
+		["<S-Tab>"] = { "select_prev", "snippet_backward", "fallback" },
+		["<C-j>"] = {
+			function(cmp)
+				cmp.select_next({ count = 3 })
+			end,
+		},
+		["<C-k>"] = {
+			function(cmp)
+				cmp.select_prev({ count = 3 })
+			end,
+		},
+		["<C-i>"] = { "show_signature", "hide_signature", "fallback" },
+		["<C-d>"] = { "show", "show_documentation", "hide_documentation" },
+		["<C-b>"] = {
+			function(cmp)
+				cmp.scroll_documentation_up(3)
+			end,
+		},
+		["<C-f>"] = {
+			function(cmp)
+				cmp.scroll_documentation_down(3)
+			end,
+		},
 	},
 	appearance = {
 		nerd_font_variant = "mono",
@@ -52,12 +77,23 @@ cmp.setup({
 		},
 	},
 	sources = {
-		default = { "lsp", "path", "snippets", "buffer" },
+		default = { "lsp", "path", "buffer", "codeium", "snippets" },
+		providers = {
+			codeium = { name = "Codeium", module = "codeium.blink", async = true },
+		},
 	},
 	fuzzy = {
 		implementation = fuzzy_implementation,
 	},
 })
+
+require("codeium").setup()
+vim.keymap.set("i", "<C-g>", function()
+	return vim.fn["codeium#Accept"]()
+end, { expr = true, silent = true, desc = "Codeium Accept" })
+vim.keymap.set("i", "<C-x>", function()
+	return vim.fn["codeium#Clear"]()
+end, { expr = true, silent = true, desc = "Codeium Clear" })
 
 local servers = {
 	"lua_ls",
