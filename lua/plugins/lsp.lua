@@ -241,6 +241,18 @@ end
 vim.api.nvim_create_autocmd("LspAttach", {
 	group = vim.api.nvim_create_augroup("user_lsp_attach", { clear = true }),
 	callback = function(event)
+		local client = vim.lsp.get_client_by_id(event.data.client_id)
+
+		-- cspell 只显示下划线，不显示 virtual text / signs / float
+		if client and client.name == "cspell_ls" then
+			vim.diagnostic.config({
+				virtual_text = false,
+				signs = true,
+				underline = true,
+				float = true,
+			}, vim.lsp.diagnostic.get_namespace(event.data.client_id))
+		end
+
 		local map = function(mode, lhs, rhs, desc)
 			vim.keymap.set(mode, lhs, rhs, {
 				buffer = event.buf,
