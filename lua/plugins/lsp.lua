@@ -80,6 +80,7 @@ require("mason-lspconfig").setup({
 	ensure_installed = servers,
 	automatic_enable = false,
 })
+require("lsp_lines").setup()
 
 local vue_language_server_path =
 	vim.fn.expand("$HOME/.local/share/nvim/mason/packages/vue-language-server/node_modules/@vue/language-server")
@@ -271,5 +272,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		map("n", "<leader>cd", vim.diagnostic.open_float, "Line diagnostics")
 		map("n", "[d", vim.diagnostic.goto_prev, "Previous diagnostic")
 		map("n", "]d", vim.diagnostic.goto_next, "Next diagnostic")
+		-- 切换多行显示LSP错误信息
+		map({ "n", "v", "x" }, "<A-i>", require("lsp_lines").toggle, "Toggle lsp_lines")
 	end,
 })

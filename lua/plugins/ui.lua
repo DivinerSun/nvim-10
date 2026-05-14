@@ -2,22 +2,27 @@ require("which-key").setup()
 
 require("lualine").setup({
 	options = {
-		theme = "catppuccin-mocha",
+		theme = "auto",
 		globalstatus = true,
-		section_separators = "",
-		component_separators = "",
+		component_separators = { left = "", right = "" },
+		section_separators = { left = "", right = "" },
 	},
 	sections = {
-		lualine_c = {
+		lualine_a = {
 			{
-				"filename",
-				path = 1,
+				"fileformat",
+				symbols = {
+					mac = "", -- e711
+					unix = "", -- e711
+					dos = "", -- e70f
+					lunix = "", -- e712
+				},
 			},
 		},
 		lualine_x = {
 			"encoding",
-			"fileformat",
 			"filetype",
+			"filesize",
 		},
 	},
 })

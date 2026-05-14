@@ -14,6 +14,8 @@ require("mason-tool-installer").setup({
 		"typescript-language-server",
 		"vue-language-server",
 		"yaml-language-server",
+		"markdownlint-cli2",
+		"markdown-toc",
 	},
 	auto_update = false,
 	run_on_start = true,
@@ -29,8 +31,6 @@ require("conform").setup({
 		jsonc = { "prettier" },
 		less = { "prettier" },
 		lua = { "stylua" },
-		markdown = { "prettier" },
-		markdown_inline = { "prettier" },
 		rust = { "rustfmt" },
 		sass = { "prettier" },
 		scss = { "prettier" },
@@ -38,6 +38,29 @@ require("conform").setup({
 		typescriptreact = { "prettier" },
 		vue = { "prettier" },
 		yaml = { "prettier" },
+		markdown = { "prettier" },
+		markdown_inline = { "prettier" },
+		["markdown.mdx"] = { "prettier", "markdownlint-cli2", "markdown-toc" },
+	},
+	formatters = {
+		injected = { options = { ignore_errors = true } },
+		["markdown-toc"] = {
+			condition = function(_, ctx)
+				for _, line in ipairs(vim.api.nvim_buf_get_lines(ctx.buf, 0, -1, false)) do
+					if line:find("<!%-%- toc %-%->") then
+						return true
+					end
+				end
+			end,
+		},
+		["markdownlint-cli2"] = {
+			condition = function(_, ctx)
+				local diag = vim.tbl_filter(function(d)
+					return d.source == "markdownlint"
+				end, vim.diagnostic.get(ctx.buf))
+				return #diag > 0
+			end,
+		},
 	},
 	format_on_save = function(bufnr)
 		local disabled_filetypes = {}
