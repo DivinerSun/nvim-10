@@ -2,8 +2,6 @@ local cmp = require("blink.cmp")
 
 require("blink.compat").setup()
 require("blink-ripgrep").setup()
-require("blink-emoji").setup()
-require("blink-nerdfont").setup()
 require("codeium").setup()
 
 local fuzzy_implementation = "prefer_rust"
