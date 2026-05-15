@@ -18,6 +18,16 @@
     "Pmenu",
     "winblend",
     "nerdfont",
-    "lazydev"
+    "lazydev",
+    "globalstatus",
+    "fileformat",
+    "lunix",
+    "filesize",
+    "showkeys",
+    "winopts",
+    "zindex",
+    "winhl",
+    "maxkeys",
+    "keyformat"
   ]
 }

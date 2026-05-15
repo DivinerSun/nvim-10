@@ -34,6 +34,8 @@ vim.pack.add({
 	{ src = "https://github.com/nvim-neo-tree/neo-tree.nvim", name = "neo-tree.nvim" },
 	{ src = "https://github.com/saifulapm/neotree-file-nesting-config", name = "neotree-file-nesting-config" },
 	{ src = "https://github.com/folke/todo-comments.nvim", name = "todo-comments.nvim" },
+	{ src = "https://github.com/mg979/vim-visual-multi", name = "vim-visual-multi" },
+	{ src = "https://github.com/DivinerSun/showkeys", name = "showkeys" },
 }, {
 	confirm = false,
 	load = true,
