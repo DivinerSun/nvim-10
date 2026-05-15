@@ -128,6 +128,10 @@
       "rev": "2499b3cc494b3f8e07c0a6cb0ae1d24fa372a487",
       "src": "https://github.com/mrcjkb/rustaceanvim"
     },
+    "todo-comments.nvim": {
+      "rev": "31e3c38ce9b29781e4422fc0322eb0a21f4e8668",
+      "src": "https://github.com/folke/todo-comments.nvim"
+    },
     "which-key.nvim": {
       "rev": "3aab2147e74890957785941f0c1ad87d0a44c15a",
       "src": "https://github.com/folke/which-key.nvim"

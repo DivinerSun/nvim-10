@@ -308,7 +308,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		if client and client.name == "cspell_ls" then
 			vim.diagnostic.config({
 				virtual_text = false,
-				signs = true,
+				signs = false,
 				underline = true,
 				float = true,
 			}, vim.lsp.diagnostic.get_namespace(event.data.client_id))

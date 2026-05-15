@@ -33,6 +33,7 @@ vim.pack.add({
 	{ src = "https://github.com/nvim-tree/nvim-web-devicons", name = "nvim-web-devicons" },
 	{ src = "https://github.com/nvim-neo-tree/neo-tree.nvim", name = "neo-tree.nvim" },
 	{ src = "https://github.com/saifulapm/neotree-file-nesting-config", name = "neotree-file-nesting-config" },
+	{ src = "https://github.com/folke/todo-comments.nvim", name = "todo-comments.nvim" },
 }, {
 	confirm = false,
 	load = true,
