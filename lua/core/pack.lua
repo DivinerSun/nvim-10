@@ -36,6 +36,7 @@ vim.pack.add({
 	{ src = "https://github.com/folke/todo-comments.nvim", name = "todo-comments.nvim" },
 	{ src = "https://github.com/mg979/vim-visual-multi", name = "vim-visual-multi" },
 	{ src = "https://github.com/DivinerSun/showkeys", name = "showkeys" },
+	{ src = "https://github.com/akinsho/toggleterm.nvim", name = "toggleterm.nvim" },
 }, {
 	confirm = false,
 	load = true,

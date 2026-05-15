@@ -28,6 +28,7 @@
     "zindex",
     "winhl",
     "maxkeys",
-    "keyformat"
+    "keyformat",
+    "toggleterm"
   ]
 }
