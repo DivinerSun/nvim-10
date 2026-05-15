@@ -15,6 +15,9 @@
     "nuxt",
     "keymaps",
     "autocmds",
-    "Pmenu"
+    "Pmenu",
+    "winblend",
+    "nerdfont",
+    "lazydev"
   ]
 }

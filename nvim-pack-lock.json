@@ -1,8 +1,24 @@
 {
   "plugins": {
+    "blink-emoji.nvim": {
+      "rev": "dff709139ad5389fb55ebab026e75278a12b325a",
+      "src": "https://github.com/moyiz/blink-emoji.nvim"
+    },
+    "blink-nerdfont.nvim": {
+      "rev": "e5034457a0a3f3444c0a48af8f5d7db0ad02a204",
+      "src": "https://github.com/MahanRahmati/blink-nerdfont.nvim"
+    },
+    "blink-ripgrep.nvim": {
+      "rev": "251ff3a48204bda4cbbff9c0f975e7a787f52bc2",
+      "src": "https://github.com/mikavilpas/blink-ripgrep.nvim"
+    },
     "blink.cmp": {
       "rev": "2ef3db111181c5eef22a462aa0122349a6027f28",
       "src": "https://github.com/saghen/blink.cmp"
+    },
+    "blink.compat": {
+      "rev": "1454f14a8d855a578ceeba77c62538fa1459a67c",
+      "src": "https://github.com/saghen/blink.compat"
     },
     "blink.lib": {
       "rev": "f29d8bac6549bc1e7d699c83f680823d7def98bd",

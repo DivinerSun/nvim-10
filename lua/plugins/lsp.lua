@@ -1,6 +1,12 @@
 local cmp = require("blink.cmp")
-local fuzzy_implementation = "prefer_rust"
 
+require("blink.compat").setup()
+require("blink-ripgrep").setup()
+require("blink-emoji").setup()
+require("blink-nerdfont").setup()
+require("codeium").setup()
+
+local fuzzy_implementation = "prefer_rust"
 if not cmp.library_available() then
 	local build_ok = pcall(function()
 		cmp.build():wait(60000)
@@ -26,6 +32,13 @@ vim.diagnostic.config({
 	signs = true,
 	underline = true,
 })
+
+vim.keymap.set("i", "<C-g>", function()
+	return vim.fn["codeium#Accept"]()
+end, { expr = true, silent = true, desc = "Codeium Accept" })
+vim.keymap.set("i", "<C-x>", function()
+	return vim.fn["codeium#Clear"]()
+end, { expr = true, silent = true, desc = "Codeium Clear" })
 
 cmp.setup({
 	keymap = {
@@ -77,23 +90,36 @@ cmp.setup({
 		},
 	},
 	sources = {
-		default = { "lsp", "path", "buffer", "codeium", "snippets" },
+		default = { "lsp", "path", "buffer", "codeium", "snippets", "ripgrep", "emoji", "nerdfont" },
 		providers = {
 			codeium = { name = "Codeium", module = "codeium.blink", async = true },
+			ripgrep = {
+				module = "blink-ripgrep",
+				name = "Ripgrep",
+				opts = {},
+			},
+			emoji = {
+				module = "blink-emoji",
+				name = "Emoji",
+				score_offset = 15,
+				opts = {
+					insert = true,
+				},
+			},
+			nerdfont = {
+				module = "blink-nerdfont",
+				name = "Nerd Fonts",
+				score_offset = 15,
+				opts = {
+					insert = true,
+				},
+			},
 		},
 	},
 	fuzzy = {
 		implementation = fuzzy_implementation,
 	},
 })
-
-require("codeium").setup()
-vim.keymap.set("i", "<C-g>", function()
-	return vim.fn["codeium#Accept"]()
-end, { expr = true, silent = true, desc = "Codeium Accept" })
-vim.keymap.set("i", "<C-x>", function()
-	return vim.fn["codeium#Clear"]()
-end, { expr = true, silent = true, desc = "Codeium Clear" })
 
 local servers = {
 	"lua_ls",
