@@ -30,6 +30,7 @@
     "maxkeys",
     "keyformat",
     "toggleterm",
-    "noice"
+    "noice",
+    "navic"
   ]
 }

@@ -39,6 +39,8 @@ vim.pack.add({
 	{ src = "https://github.com/akinsho/toggleterm.nvim", name = "toggleterm.nvim" },
 	{ src = "https://github.com/rcarriga/nvim-notify", name = "nvim-notify" },
 	{ src = "https://github.com/folke/noice.nvim", name = "noice.nvim" },
+	{ src = "https://github.com/b0o/incline.nvim", name = "incline.nvim" },
+	{ src = "https://github.com/SmiteshP/nvim-navic", name = "nvim-navic" },
 }, {
 	confirm = false,
 	load = true,
