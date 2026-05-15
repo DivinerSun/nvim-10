@@ -29,6 +29,7 @@
     "winhl",
     "maxkeys",
     "keyformat",
-    "toggleterm"
+    "toggleterm",
+    "noice"
   ]
 }

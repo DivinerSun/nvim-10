@@ -10,6 +10,7 @@ require("which-key").setup({
 			{ "<leader>d", group = " Debug", icon = " " },
 			{ "<leader>f", group = " Find", icon = " " },
 			{ "<leader>g", group = " Git", icon = " " },
+			{ "<leader>n", group = " Notify", icon = "󱅰 " },
 			-- { "<leader>p", group = "Preview/Paste", icon = " " },
 			{ "<leader>q", group = " Session", icon = " " },
 			{ "<leader>s", group = " Split", icon = " " },
