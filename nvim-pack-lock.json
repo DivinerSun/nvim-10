@@ -148,6 +148,10 @@
       "rev": "050616349e31182e11d866ea9da5bf7d2af3da6a",
       "src": "https://github.com/DivinerSun/showkeys"
     },
+    "snacks.nvim": {
+      "rev": "ad9ede6a9cddf16cedbd31b8932d6dcdee9b716e",
+      "src": "https://github.com/folke/snacks.nvim"
+    },
     "todo-comments.nvim": {
       "rev": "31e3c38ce9b29781e4422fc0322eb0a21f4e8668",
       "src": "https://github.com/folke/todo-comments.nvim"

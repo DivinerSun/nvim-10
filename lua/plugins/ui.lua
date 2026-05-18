@@ -23,6 +23,76 @@ vim.keymap.set("n", "<leader>?", function()
 	require("which-key").show({ global = false })
 end, { desc = "Buffer Local KeyMaps" })
 
+local Snacks = require("snacks")
+Snacks.setup({
+	bigfile = { enabled = true },
+	dashboard = {
+		enabled = true,
+		preset = {
+			header = [[
+          ==================================================================================================
+          ||   /$$$$$$$  /$$            /$$                              /$$ /$$    /$$ /$$               ||
+          ||  | $$__  $$|__/           |__/                             | $/| $$   | $$|__/               ||
+          ||  | $$  \ $$ /$$ /$$    /$$ /$$ /$$$$$$$   /$$$$$$   /$$$$$$|_/ | $$   | $$ /$$ /$$$$$$/$$$$  ||
+          ||  | $$  | $$| $$|  $$  /$$/| $$| $$__  $$ /$$__  $$ /$$__  $$   |  $$ / $$/| $$| $$_  $$_  $$ ||
+          ||  | $$  | $$| $$ \  $$/$$/ | $$| $$  \ $$| $$$$$$$$| $$  \__/    \  $$ $$/ | $$| $$ \ $$ \ $$ ||
+          ||  | $$  | $$| $$  \  $$$/  | $$| $$  | $$| $$_____/| $$           \  $$$/  | $$| $$ | $$ | $$ ||
+          ||  | $$$$$$$/| $$   \  $/   | $$| $$  | $$|  $$$$$$$| $$            \  $/   | $$| $$ | $$ | $$ ||
+          ||  |_______/ |__/    \_/    |__/|__/  |__/ \_______/|__/             \_/    |__/|__/ |__/ |__/ ||
+          ==================================================================================================
+        ]],
+			keys = {
+				{ icon = " ", key = "f", desc = "Find File", action = ":lua Snacks.dashboard.pick('files')" },
+				{ icon = " ", key = "n", desc = "New File", action = ":ene | startinsert" },
+				{
+					icon = " ",
+					key = "g",
+					desc = "Find Text",
+					action = ":lua Snacks.dashboard.pick('live_grep')",
+				},
+				{
+					icon = " ",
+					key = "r",
+					desc = "Recent Files",
+					action = ":lua Snacks.dashboard.pick('oldfiles')",
+				},
+				{
+					icon = " ",
+					key = "c",
+					desc = "Config",
+					action = ":lua Snacks.dashboard.pick('files', {cwd = vim.fn.stdpath('config')})",
+				},
+				{ icon = " ", key = "s", desc = "Restore Session", section = "session" },
+				-- { icon = "󰒲 ", key = "l", desc = "Lazy", action = ":Lazy" },
+				{ icon = " ", key = "q", desc = "Quit", action = ":qa" },
+			},
+		},
+		sections = {
+			{ section = "header", padding = { 2, 1 } },
+			{ section = "keys", gap = 1, padding = 0 },
+			-- { section = "startup" },
+		},
+	},
+	explorer = { enabled = false },
+	indent = { enabled = true },
+	input = { enabled = true },
+	notifier = {
+		enabled = false,
+		timeout = 3000,
+	},
+	picker = { enabled = true },
+	quickfile = { enabled = true },
+	scope = { enabled = true },
+	scroll = { enabled = true },
+	statuscolumn = { enabled = true },
+	words = { enabled = true },
+	styles = {
+		notification = {
+			wo = { wrap = true }, -- Wrap notifications
+		},
+	},
+})
+
 require("lualine").setup({
 	options = {
 		theme = "auto",
