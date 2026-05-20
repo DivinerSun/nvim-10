@@ -16,6 +16,10 @@ require("mason-tool-installer").setup({
 		"yaml-language-server",
 		"markdownlint-cli2",
 		"markdown-toc",
+		-- Python
+		"basedpyright",
+		"ruff",
+		"debugpy",
 	},
 	auto_update = false,
 	run_on_start = true,
@@ -31,6 +35,7 @@ require("conform").setup({
 		jsonc = { "prettier" },
 		less = { "prettier" },
 		lua = { "stylua" },
+		python = { "ruff_format", "ruff_organize_imports" },
 		rust = { "rustfmt" },
 		sass = { "prettier" },
 		scss = { "prettier" },

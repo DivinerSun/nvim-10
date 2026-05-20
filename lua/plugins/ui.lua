@@ -111,6 +111,7 @@ require("lualine").setup({
 					lunix = "", -- e712
 				},
 			},
+			"mode",
 		},
 		lualine_x = {
 			"encoding",
@@ -199,7 +200,12 @@ incline.setup({
 			{ get_git_diff() },
 			ft_icon and { " ", ft_icon, " ", guibg = ft_color, guifg = helpers.contrast_color(ft_color) }
 				or { " ", guifg = ft_color, guibg = "none" },
-			{ " " .. filename .. " ", gui = modified and "bold,italic" or "bold", guibg = ft_color },
+			{
+				" " .. filename .. " ",
+				gui = modified and "bold,italic" or "bold",
+				guibg = ft_color,
+				guifg = helpers.contrast_color(ft_color),
+			},
 			{ "┊  " .. vim.api.nvim_win_get_number(props.win), group = "DevIconWindows" },
 			guibg = "#44406e",
 		}
