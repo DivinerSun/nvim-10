@@ -58,3 +58,11 @@ vim.api.nvim_create_autocmd("FileType", {
 		vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
 	end,
 })
+
+require("nvim-ts-autotag").setup({
+	opts = {
+		enable_close = true, -- 输入 > 后自动补 </tag>
+		enable_rename = true, -- 修改标签名时同步改配对标签
+		enable_close_on_slash = false, -- 输入 </ 时是否自动补全（按需改为 true）
+	},
+})

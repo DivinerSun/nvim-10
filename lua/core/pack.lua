@@ -42,6 +42,7 @@ vim.pack.add({
 	{ src = "https://github.com/b0o/incline.nvim", name = "incline.nvim" },
 	{ src = "https://github.com/SmiteshP/nvim-navic", name = "nvim-navic" },
 	{ src = "https://github.com/folke/snacks.nvim", name = "snacks.nvim" },
+	{ src = "https://github.com/windwp/nvim-ts-autotag", name = "nvim-ts-autotag" },
 }, {
 	confirm = false,
 	load = true,
