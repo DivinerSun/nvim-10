@@ -24,7 +24,6 @@ vim.pack.add({
 	{ src = "https://github.com/echasnovski/mini.comment", name = "mini.comment" },
 	{ src = "https://github.com/echasnovski/mini.pairs", name = "mini.pairs" },
 	{ src = "https://github.com/echasnovski/mini.surround", name = "mini.surround" },
-	{ src = "https://github.com/ibhagwan/fzf-lua", name = "fzf-lua" },
 	{ src = "https://github.com/folke/which-key.nvim", name = "which-key.nvim" },
 	{ src = "https://github.com/nvim-lualine/lualine.nvim", name = "lualine.nvim" },
 	{ src = "https://github.com/nvim-lua/plenary.nvim", name = "plenary.nvim" },

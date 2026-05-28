@@ -80,7 +80,36 @@ Snacks.setup({
 		enabled = false,
 		timeout = 3000,
 	},
-	picker = { enabled = true },
+	picker = {
+		enabled = true,
+		ui_select = true, -- 替代 vim.ui.select（插件安装等场景）
+		win = {
+			border = "rounded", -- 对齐原来 fzf-lua 的 border
+		},
+		matcher = {
+			fuzzy = true,
+			smartcase = true,
+			ignorecase = true,
+			filename_bonus = true,
+		},
+		sources = {
+			grep = {
+				live = true,
+				args = { "--max-columns=4096" }, -- 对齐你原来的 rg_opts
+			},
+			files = {
+				hidden = true, -- 可选：显示隐藏文件
+				ignored = false, -- 可选：不搜 .gitignore 里的
+			},
+		},
+	},
+	lazygit = {
+		configure = true, -- 自动主题 + nvim-remote 集成
+		win = {
+			border = "rounded", -- 对齐 picker
+			wo = { winblend = 0 }, -- 透明主题下避免透出编辑器
+		},
+	},
 	quickfile = { enabled = true },
 	scope = { enabled = true },
 	scroll = { enabled = true },
@@ -302,9 +331,3 @@ require("toggleterm").setup({
 		title_pos = "center",
 	},
 })
-
-local Terminal = require("toggleterm.terminal").Terminal
-local lazygit = Terminal:new({ cmd = "lazygit", hidden = true })
-vim.keymap.set("n", "<leader>gg", function()
-	lazygit:toggle()
-end, { desc = "LazyGit Toggle" })

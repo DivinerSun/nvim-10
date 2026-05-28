@@ -31,6 +31,17 @@
     "keyformat",
     "toggleterm",
     "noice",
-    "navic"
+    "navic",
+    "colorschemes",
+    "topdelete",
+    "changedelete",
+    "signcolumn",
+    "numhl",
+    "linehl",
+    "virt",
+    "bufnr",
+    "creatordate",
+    "objectname",
+    "worktree"
   ]
 }

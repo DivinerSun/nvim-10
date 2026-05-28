@@ -64,6 +64,7 @@ require("catppuccin").setup({
 		which_key = true,
 		mason = true,
 		fzf = true,
+		snacks = { enabled = true },
 		mini = {
 			enabled = true,
 		},

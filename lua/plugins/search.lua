@@ -1,25 +1,38 @@
-local fzf = require("fzf-lua")
+local Snacks = require("snacks")
 
-fzf.setup({
-	winopts = {
-		border = "rounded",
-		preview = {
-			border = "rounded",
-		},
-	},
-	files = {
-		git_icons = true,
-		file_icons = true,
-	},
-	grep = {
-		rg_opts = "--column --line-number --no-heading --color=always --smart-case --max-columns=4096",
-	},
-})
-
-vim.keymap.set("n", "<leader>ff", fzf.files, { desc = "Find files" })
-vim.keymap.set("n", "<leader>fg", fzf.live_grep, { desc = "Live grep" })
-vim.keymap.set("n", "<leader>/", "<cmd>FzfLua live_grep<CR>", { desc = "Find text" })
-vim.keymap.set("n", "<leader>fb", fzf.buffers, { desc = "Find buffers" })
-vim.keymap.set("n", "<leader>fh", fzf.help_tags, { desc = "Help tags" })
-vim.keymap.set("n", "<leader>fr", fzf.oldfiles, { desc = "Recent files" })
-vim.keymap.set("n", "<leader>fc", "<cmd>FzfLua colorschemes<CR>", { desc = "Change ColorScheme" })
+vim.keymap.set("n", "<leader>ff", function()
+	Snacks.picker.files()
+end, { desc = "Find files" })
+vim.keymap.set("n", "<leader>fg", function()
+	Snacks.picker.grep()
+end, { desc = "Live grep" })
+vim.keymap.set("n", "<leader>/", function()
+	Snacks.picker.grep()
+end, { desc = "Find text" })
+vim.keymap.set("n", "<leader>fb", function()
+	Snacks.picker.buffers()
+end, { desc = "Find buffers" })
+vim.keymap.set("n", "<leader>fh", function()
+	Snacks.picker.help()
+end, { desc = "Help tags" })
+vim.keymap.set("n", "<leader>fr", function()
+	Snacks.picker.recent()
+end, { desc = "Recent files" })
+vim.keymap.set("n", "<leader>fc", function()
+	Snacks.picker.colorschemes()
+end, { desc = "Change ColorScheme" })
+vim.keymap.set("n", "<leader><Space>", function()
+	Snacks.picker.smart() -- 智能搜索(文件+buffer+recent)
+end, { desc = "Smart Search" })
+vim.keymap.set("n", "<leader>fp", function()
+	Snacks.picker.projects()
+end, { desc = "Recent Projects" })
+vim.keymap.set("n", "<leader>fw", function()
+	Snacks.picker.grep_word() -- 搜索光标下单词
+end, { desc = "Search Current Word" })
+vim.keymap.set("n", "<leader>fd", function()
+	Snacks.picker.diagnostics()
+end, { desc = "Search Diagnostics" })
+vim.keymap.set("n", "<leader>fk", function()
+	Snacks.picker.keymaps()
+end, { desc = "View Keymaps" })
