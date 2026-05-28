@@ -133,6 +133,7 @@ local servers = {
 	"yamlls",
 	"taplo",
 	"cspell_ls",
+	"prismals",
 }
 
 require("mason").setup()

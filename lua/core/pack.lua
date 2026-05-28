@@ -10,7 +10,6 @@ vim.pack.add({
 	{ src = "https://github.com/saghen/blink.lib", name = "blink.lib" },
 	{ src = "https://github.com/saghen/blink.cmp", name = "blink.cmp" },
 	{ src = "https://github.com/hrsh7th/nvim-cmp", name = "nvim-cmp" },
-	{ src = "https://github.com/Exafunction/codeium.nvim", name = "codeium.nvim" },
 	{ src = "https://github.com/Exafunction/windsurf.nvim", name = "windsurf.nvim" },
 	{ src = "https://github.com/mikavilpas/blink-ripgrep.nvim", name = "blink-ripgrep.nvim" },
 	{ src = "https://github.com/moyiz/blink-emoji.nvim", name = "blink-emoji.nvim" },

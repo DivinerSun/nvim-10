@@ -3,7 +3,7 @@ local opts = { noremap = true, silent = true }
 
 -- ESC常用映射
 keymap("i", "jk", "<ESC>", opts)
-keymap("i", "jj", "<ESC>jo", opts)
+keymap("i", "jj", "<ESC>ko", opts)
 keymap("i", "kk", "<ESC>o", opts)
 
 -- 快速跳转

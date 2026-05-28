@@ -21,6 +21,7 @@ local languages = {
 	"vimdoc",
 	"vue",
 	"yaml",
+	"prisma",
 }
 
 treesitter.setup({
@@ -52,6 +53,7 @@ vim.api.nvim_create_autocmd("FileType", {
 		"vim",
 		"vue",
 		"yaml",
+		"prisma",
 	},
 	callback = function()
 		pcall(vim.treesitter.start)

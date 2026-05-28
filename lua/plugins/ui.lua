@@ -146,7 +146,15 @@ incline.setup({
 		if filename == "" then
 			filename = "[No Name]"
 		end
-		local ft_icon, ft_color = devicons.get_icon_color(filename)
+		local ft = vim.bo[props.buf].filetype
+		local ft_icon, ft_color = devicons.get_icon_color_by_filetype(ft)
+		if not ft_icon then
+			ft_icon, ft_color = devicons.get_icon_color(filename)
+		end
+		local default_bg = "#44406e"
+		local bg = (type(ft_color) == "string" and ft_color:match("^#%x%x%x%x%x%x$")) and ft_color or default_bg
+		local fg = helpers.contrast_color(bg)
+		-- local ft_icon, ft_color = devicons.get_icon_color(filename)
 		local modified = vim.bo[props.buf].modified
 
 		local function get_git_diff()
@@ -168,7 +176,7 @@ incline.setup({
 				end
 			end
 			if #labels > 0 then
-				table.insert(labels, { "┊ " })
+				table.insert(labels, { "┊" })
 			end
 			return labels
 		end
@@ -189,7 +197,7 @@ incline.setup({
 				end
 			end
 			if #label > 0 then
-				table.insert(label, { "┊ " })
+				table.insert(label, { "┊" })
 			end
 
 			return label
@@ -198,16 +206,15 @@ incline.setup({
 		local res = {
 			{ get_diagnostic_label() },
 			{ get_git_diff() },
-			ft_icon and { " ", ft_icon, " ", guibg = ft_color, guifg = helpers.contrast_color(ft_color) }
-				or { " ", guifg = ft_color, guibg = "none" },
+			ft_icon and { " ", ft_icon, " ", guibg = bg, guifg = fg } or { " " },
 			{
 				" " .. filename .. " ",
 				gui = modified and "bold,italic" or "bold",
-				guibg = ft_color,
-				guifg = helpers.contrast_color(ft_color),
+				guibg = bg,
+				guifg = fg,
 			},
 			{ "┊  " .. vim.api.nvim_win_get_number(props.win), group = "DevIconWindows" },
-			guibg = "#44406e",
+			guibg = default_bg,
 		}
 
 		if props.focused then
@@ -290,7 +297,7 @@ require("toggleterm").setup({
 	auto_scroll = true,
 	float_opts = {
 		border = "curved", -- 'single' | 'double' | 'shadow' | 'curved'
-		winblend = 3,
+		winblend = 0,
 		zindex = 99,
 		title_pos = "center",
 	},
