@@ -1,3 +1,16 @@
+require("nvim-highlight-colors").setup({
+	render = "background",
+	enable_hex = true,
+	enable_rgb = true,
+	enable_hsl = true,
+	enable_hsla = true,
+	enable_var_usage = true,
+	enable_named_colors = true,
+	enable_tailwind = true,
+	virtual_symbol = "■",
+	virtual_symbol_position = "inline",
+})
+
 require("which-key").setup({
 	preset = "helix",
 	icons = { group = "" },
