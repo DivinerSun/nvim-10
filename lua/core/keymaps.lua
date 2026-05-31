@@ -59,44 +59,157 @@ keymap("n", "<leader>sv", "<cmd>split<CR>", { desc = "Split vertically" })
 keymap("n", "<leader>sx", "<cmd>close<CR>", { desc = "Close split" })
 
 --- CSpell：将光标下的错拼单词加入词库（需 cspell_ls + 该处有拼写诊断）
-local function cspell_diags_at_cursor()
-	local row = vim.api.nvim_win_get_cursor(0)[1] - 1
-	local col = vim.api.nvim_win_get_cursor(0)[2]
-	local diags = vim.diagnostic.get(0, { pos = { row, col } })
-	if #diags == 0 then
-		diags = vim.diagnostic.get(0, { lnum = row })
-	end
-	return vim.tbl_filter(function(d)
-		local s = (d.source or ""):lower()
-		return s:find("cspell", 1, true) ~= nil
-	end, diags)
+local function cspell_get_client()
+	return vim.lsp.get_clients({ bufnr = 0, name = "cspell_ls" })[1]
 end
 
-local function cspell_add_to(title)
+local function cspell_namespace()
+	local client = cspell_get_client()
+	return client and vim.lsp.diagnostic.get_namespace(client.id) or nil
+end
+
+local function cspell_is_cspell_diag(d, ns)
+	if ns and d.namespace == ns then
+		return true
+	end
+	return (d.source or ""):lower():find("cspell", 1, true) ~= nil
+end
+
+--- 光标是否落在 diagnostic 的字节范围内
+local function cspell_cursor_in_diag(row0, col0, d)
+	if d.lnum ~= row0 or (d.end_lnum or d.lnum) ~= row0 or not d.end_col then
+		return false
+	end
+	return col0 >= d.col and col0 < d.end_col
+end
+
+--- 精确匹配光标下的 cspell diagnostic（仅 1 条）
+local function cspell_diag_at_cursor()
+	local row0 = vim.api.nvim_win_get_cursor(0)[1] - 1
+	local col0 = vim.api.nvim_win_get_cursor(0)[2]
+	local ns = cspell_namespace()
+	local get_opts = ns and { namespace = ns } or nil
+	local line_diags = {}
+
+	for _, d in ipairs(vim.diagnostic.get(0, get_opts)) do
+		if cspell_is_cspell_diag(d, ns) then
+			if cspell_cursor_in_diag(row0, col0, d) then
+				return d
+			end
+			if d.lnum == row0 then
+				line_diags[#line_diags + 1] = d
+			end
+		end
+	end
+
+	-- 当前行只有一个 cspell 错词时，允许光标略偏（仍在本行）
+	if #line_diags == 1 then
+		return line_diags[1]
+	end
+
+	return nil
+end
+
+local function cspell_word_from_diag(d)
+	return table.concat(
+		vim.api.nvim_buf_get_text(0, d.lnum, d.col, d.end_lnum, d.end_col, {}),
+		"\n"
+	)
+end
+
+local function cspell_lsp_range(d)
+	local lsp = d.user_data and d.user_data.lsp
+	if lsp and lsp.range then
+		return lsp.range
+	end
+	return {
+		start = { line = d.lnum, character = d.col },
+		["end"] = { line = d.end_lnum, character = d.end_col },
+	}
+end
+
+local function cspell_add_to(command)
 	return function()
-		local diags = cspell_diags_at_cursor()
-		if #diags == 0 then
+		local d = cspell_diag_at_cursor()
+		if not d then
 			vim.notify("No cspell diagnostic here — put cursor on the underlined word.", vim.log.levels.WARN)
 			return
 		end
-		-- Must pass LSP Diagnostic[], not vim.Diagnostic[] — otherwise servers return no actions.
-		local lsp_diags = vim.lsp.diagnostic.from(diags)
-		vim.lsp.buf.code_action({
-			context = {
-				diagnostics = lsp_diags,
-				only = { "quickfix" },
+		local client = cspell_get_client()
+		if not client then
+			vim.notify("cspell_ls is not attached to this buffer.", vim.log.levels.WARN)
+			return
+		end
+		-- 直接 exec_cmd 并传入当前 diagnostic 的 range，避免 cspell_ls 固定取 diagnostics[0]
+		client:exec_cmd({
+			command = command,
+			arguments = {
+				{
+					uri = vim.uri_from_bufnr(0),
+					range = cspell_lsp_range(d),
+					message = d.message,
+				},
 			},
-			filter = function(action)
-				return (action.title or "") == title
-			end,
-			apply = true,
 		})
 	end
 end
 
-keymap("n", "<leader>cW", cspell_add_to("Add to workspace words in config"), {
+local function cspell_read_json(path)
+	local f = io.open(path, "r")
+	if not f then
+		return {}
+	end
+	local content = f:read("*a")
+	f:close()
+	if not content or content:match("^%s*$") then
+		return {}
+	end
+	local ok, cfg = pcall(vim.json.decode, content)
+	if not ok or type(cfg) ~= "table" then
+		return {}
+	end
+	return cfg
+end
+
+local function cspell_write_json(path, cfg)
+	vim.fn.mkdir(vim.fn.fnamemodify(path, ":h"), "p")
+	local out = io.open(path, "w")
+	if not out then
+		return false
+	end
+	out:write(vim.json.encode(cfg, { indent = "  " }))
+	out:write("\n")
+	out:close()
+	return true
+end
+
+local function cspell_add_project()
+	local d = cspell_diag_at_cursor()
+	if not d then
+		vim.notify("No cspell diagnostic here — put cursor on the underlined word.", vim.log.levels.WARN)
+		return
+	end
+	local word = cspell_word_from_diag(d)
+	local root = vim.fs.root(0, { ".git", "cspell.json", "package.json", "Cargo.toml" })
+	if not root then
+		vim.notify("Cannot find project root for cspell.json", vim.log.levels.WARN)
+		return
+	end
+	local path = root .. "/cspell.json"
+	local cfg = cspell_read_json(path)
+	cfg.words = cfg.words or {}
+	if not vim.tbl_contains(cfg.words, word) then
+		table.insert(cfg.words, word)
+		table.sort(cfg.words)
+	end
+	if cspell_write_json(path, cfg) then
+		vim.notify('Added "' .. word .. '" to project cspell', vim.log.levels.INFO)
+	end
+end
+
+keymap("n", "<leader>cW", cspell_add_project, {
 	desc = "CSpell: add word to workspace dictionary",
 })
-keymap("n", "<leader>cw", cspell_add_to("Add to user words in config"), {
-	desc = "CSpell: add word to user dictionary",
+keymap("n", "<leader>cw", cspell_add_to("AddToUserWordsConfig"), {
+	desc = "CSpell: add word to user global dictionary",
 })

@@ -148,6 +148,12 @@ local vue_language_server_path =
 
 local server_configs = {
 	cspell_ls = {
+		cmd = {
+			"cspell-lsp",
+			"--stdio",
+			"-c",
+			vim.fn.expand("~/.config/cspell/cspell.json"),
+		},
 		filetypes = {
 			"css",
 			"gitcommit",
