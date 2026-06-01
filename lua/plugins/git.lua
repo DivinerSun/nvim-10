@@ -141,13 +141,34 @@ require("gitsigns").setup({
 				cmd = "git",
 				args = { "worktree", "list" },
 				finder = require("snacks.picker.source.proc").proc,
-				format = "text",
+				format = function(item, picker)
+					local a = Snacks.picker.util.align
+					local line = item.file or item.text
+					if item.branch then
+						line = item.file .. "  [" .. item.branch .. "]"
+					elseif item.detached then
+						line = item.file .. "  (detached HEAD)"
+					end
+					return {
+						{ picker.opts.icons.git.branch or "󰘬 ", "SnacksPickerGitBranch" },
+						{ a(line, 60, { truncate = true }), "SnacksPickerGitBranch" },
+					}
+				end,
 				preview = "git_log",
 				confirm = "tcd",
 				transform = function(item)
-					local path, commit, branch = item.text:match("^(%S+)%s+(%x+)%s+%[(.-)%]$")
+					local text = vim.trim(item.text or "")
+					if text == "" then
+						return false
+					end
+					local path, commit, branch = text:match("^(.-)%s+(%x+)%s+%[(.-)%]$")
+					local detached
 					if not path then
-						path, commit = item.text:match("^(%S+)%s+(%x+)")
+						path, commit = text:match("^(.-)%s+(%x+)%s+%(detached HEAD%)$")
+						detached = path ~= nil
+					end
+					if not path then
+						path, commit = text:match("^(.-)%s+(%x+)$")
 					end
 					if not path then
 						return false
@@ -156,7 +177,8 @@ require("gitsigns").setup({
 					item.file = path
 					item.commit = commit
 					item.branch = branch
-					item.text = branch and (path .. "  [" .. branch .. "]") or path
+					item.detached = detached
+					-- 不要修改 item.text：Snacks 会对 transform 执行两次，改 text 会导致第二次解析失败
 				end,
 				win = {
 					input = {
@@ -164,7 +186,7 @@ require("gitsigns").setup({
 							["<C-f>"] = {
 								function(picker, item)
 									picker:close()
-									if item then
+									if item and item.file then
 										Snacks.picker.files({ cwd = item.file })
 									end
 								end,
