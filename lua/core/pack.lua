@@ -42,6 +42,7 @@ vim.pack.add({
 	{ src = "https://github.com/folke/snacks.nvim", name = "snacks.nvim" },
 	{ src = "https://github.com/windwp/nvim-ts-autotag", name = "nvim-ts-autotag" },
 	{ src = "https://github.com/brenoprata10/nvim-highlight-colors", name = "nvim-highlight-colors" },
+	{ src = "https://github.com/MeanderingProgrammer/render-markdown.nvim", name = "render-markdown.nvim" },
 }, {
 	confirm = false,
 	load = true,
