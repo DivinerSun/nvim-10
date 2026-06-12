@@ -357,3 +357,18 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		map({ "n", "v", "x" }, "<A-i>", require("lsp_lines").toggle, "Toggle lsp_lines")
 	end,
 })
+
+-- Import 快捷键：用 FileType 替代 LspAttach，每个 buffer 只触发一次
+-- LspAttach 每接入一个客户端就触发一次，无法用简单 maparg 去重
+vim.api.nvim_create_autocmd("FileType", {
+	group = vim.api.nvim_create_augroup("user_import_keymaps", { clear = true }),
+	pattern = { "javascript", "javascriptreact", "typescript", "typescriptreact", "vue", "python", "go", "rust" },
+	callback = function(event)
+		local functions = require("utils.functions")
+		local map = function(lhs, rhs, desc)
+			vim.keymap.set("n", lhs, rhs, { buffer = event.buf, desc = desc, silent = true })
+		end
+		map("<leader>cs", functions.sort_imports, "Sort imports")
+		map("<leader>co", functions.remove_unused_imports, "Remove unused imports")
+	end,
+})
