@@ -88,12 +88,17 @@ cmp.setup({
 		},
 	},
 	sources = {
-		default = { "lsp", "path", "buffer", "codeium", "snippets", "ripgrep", "emoji", "nerdfont" },
+		default = { "lsp", "path", "buffer", "crates", "snippets", "ripgrep", "emoji", "nerdfont" },
 		providers = {
 			lsp = {
 				name = "LSP",
 				module = "blink.cmp.sources.lsp",
 				score_offset = 100,
+			},
+			crates = {
+				name = "crates",
+				module = "blink.compat.source",
+				score_offset = 90,
 			},
 			buffer = {
 				module = "blink.cmp.sources.buffer",
@@ -103,7 +108,6 @@ cmp.setup({
 				module = "blink.cmp.sources.snippets",
 				score_offset = 60,
 			},
-			codeium = { name = "Codeium", module = "codeium.blink", score_offset = 30, async = true },
 			ripgrep = {
 				module = "blink-ripgrep",
 				name = "Ripgrep",

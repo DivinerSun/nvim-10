@@ -112,3 +112,42 @@ vim.api.nvim_create_autocmd("FileType", {
 		end, "Rust fly check")
 	end,
 })
+
+require("crates").setup({
+	completion = {
+		cmp = {
+			enabled = true, -- 供 blink.compat 使用
+		},
+	},
+	lsp = {
+		enabled = true,
+		actions = true,
+		completion = true,
+		hover = true,
+	},
+})
+
+vim.api.nvim_create_autocmd("BufRead", {
+	group = vim.api.nvim_create_augroup("user_crates_keymaps", { clear = true }),
+	pattern = "Cargo.toml",
+	callback = function(event)
+		local crates = require("crates")
+		local map = function(lhs, rhs, desc)
+			vim.keymap.set("n", lhs, rhs, {
+				buffer = event.buf,
+				silent = true,
+				desc = desc,
+			})
+		end
+
+		map("<leader>ct", crates.toggle, "Crates toggle")
+		map("<leader>cr", crates.reload, "Crates reload")
+		map("<leader>cv", crates.show_versions_popup, "Crates versions")
+		map("<leader>cf", crates.show_features_popup, "Crates features")
+		map("<leader>cd", crates.show_dependencies_popup, "Crates dependencies")
+		map("<leader>cu", crates.update_crate, "Crates update")
+		map("<leader>ca", crates.update_all_crates, "Crates update all")
+		map("<leader>cU", crates.upgrade_crate, "Crates upgrade")
+		map("<leader>cA", crates.upgrade_all_crates, "Crates upgrade all")
+	end,
+})

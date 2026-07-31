@@ -16,6 +16,7 @@ vim.pack.add({
 	{ src = "https://github.com/MahanRahmati/blink-nerdfont.nvim", name = "blink-nerdfont.nvim" },
 	{ src = "https://github.com/stevearc/conform.nvim", name = "conform.nvim" },
 	{ src = "https://github.com/mrcjkb/rustaceanvim", name = "rustaceanvim" },
+	{ src = "https://github.com/saecki/crates.nvim", name = "crates.nvim" },
 	{ src = "https://github.com/mfussenegger/nvim-dap", name = "nvim-dap" },
 	{ src = "https://github.com/rcarriga/nvim-dap-ui", name = "nvim-dap-ui" },
 	{ src = "https://github.com/nvim-neotest/nvim-nio", name = "nvim-nio" },

@@ -3,8 +3,8 @@ local opts = { noremap = true, silent = true }
 
 -- ESC常用映射
 keymap("i", "jk", "<ESC>", opts)
-keymap("i", "jj", "<ESC>ko", opts)
-keymap("i", "kk", "<ESC>o", opts)
+keymap("i", "jj", "<ESC>o", opts)
+keymap("i", "kk", "<ESC>ko", opts)
 
 -- 快速跳转
 keymap({ "n", "v" }, "<C-h>", "^", opts)
@@ -111,10 +111,7 @@ local function cspell_diag_at_cursor()
 end
 
 local function cspell_word_from_diag(d)
-	return table.concat(
-		vim.api.nvim_buf_get_text(0, d.lnum, d.col, d.end_lnum, d.end_col, {}),
-		"\n"
-	)
+	return table.concat(vim.api.nvim_buf_get_text(0, d.lnum, d.col, d.end_lnum, d.end_col, {}), "\n")
 end
 
 local function cspell_lsp_range(d)
